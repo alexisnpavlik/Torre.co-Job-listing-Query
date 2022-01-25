@@ -1,12 +1,12 @@
 SELECT
-    o.id as job_id,
-    o.objective as job_title,
-    -- Company,
-    -- URL,
-    -- Manager Link,
+    o.id as ID,
+    o.objective as job_title
 
-FROM opportunities o
+FROM opportunities as o
 
-WHERE 
+WHERE true
     and objective <> 'Shared by an intermediary'
     and review = 'approved'
+
+group by o.id
+order by o.created desc;
