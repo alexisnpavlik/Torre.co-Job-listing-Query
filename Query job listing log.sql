@@ -33,8 +33,8 @@ FROM opportunities as o
 left join opportunity_candidates as oc on o.id = oc.opportunity_id
 
 WHERE true
-    and objective <> 'Shared by an intermediary'
-    and review = 'approved'
+    and o.objective <> 'Shared by an intermediary'
+    and o.review = 'approved'
 
 group by o.id
 order by o.created desc;
