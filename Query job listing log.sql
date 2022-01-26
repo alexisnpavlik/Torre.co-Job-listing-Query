@@ -11,7 +11,7 @@ SELECT
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
     o.created as 'Created date',
     o.reviewed as 'Approved date',
-    -- closing date,
+    o.deadline as 'Closing date',
     o.locale as 'Language of the post',
     o.commitment_id as 'Type of job',
     o.fulfillment as 'Type of service',
