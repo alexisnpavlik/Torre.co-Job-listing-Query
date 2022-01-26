@@ -18,6 +18,7 @@ SELECT
     och.created as 'Commited date',
     me.send_disqualified_notification = 'True' as 'Disqualified',
     pam.person_id as 'Account manager',
+    (select o.reviewed where not null) as 'apobated date'
     -- Recruiter_advisor,
     o.status as 'Status',
     o.last_updated as 'Changes history',
