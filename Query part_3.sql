@@ -1,6 +1,6 @@
 SELECT
     o.id as ID,
-    (select me.send_disqualified_notification from member_evaluations where me.send_disqualified_notification = 'True' )as 'Disqualified',
+    (select me.send_disqualified_notification from member_evaluations as me where me.send_disqualified_notification = 'True' )as 'Disqualified',
     (select me.interested from member_evaluations as me where me.interested = oc.interested ) as 'MatchDate'
    
 
