@@ -1,5 +1,5 @@
 SELECT
-    o.id as ID,
+    o.id as ID_2,
     och.created as 'Commited date',
     
     sum(case when oc.id is not null and osh.hiring_date is not null then 1 else 0 end) as 'Hires'
