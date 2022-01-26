@@ -1,4 +1,9 @@
 SELECT
+
+    -- Mauricio here --
+
+
+    
     o.id as ID,
     o.objective as 'Job title',
     -- url,
@@ -37,4 +42,5 @@ WHERE true
     and o.review = 'approved'
 
 group by o.id
-order by o.created desc;
+order by o.created desc
+LIMIT 10000;
