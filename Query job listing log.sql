@@ -1,6 +1,14 @@
 SELECT
     o.id as ID,
-    o.objective as job_title
+    o.objective as Job_title,
+    -- url,
+    -- Manager Link,
+    -- location,
+    o.created as Created_date,
+    o.reviewed as Approved_date,
+    -- closing date,
+    o.locale as Language_of_the_post
+    
 
 FROM opportunities as o
 
