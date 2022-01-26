@@ -1,8 +1,4 @@
 SELECT
-
-    -- Mauricio here --
-
-
     
     o.id as ID,
     o.objective as 'Job title',
