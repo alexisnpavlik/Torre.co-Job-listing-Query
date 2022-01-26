@@ -16,6 +16,7 @@ SELECT
     o.commitment_id as 'Type of job',
     o.fulfillment as 'Type of service',
     och.created as 'Commited date',
+    me.send_disqualified_notification = 'True' as 'Disqualified '
     -- Recruiter_advisor,
     o.status as 'Status',
     o.last_updated as 'Changes history',
