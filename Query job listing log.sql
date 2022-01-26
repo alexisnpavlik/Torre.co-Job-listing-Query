@@ -37,7 +37,7 @@ SELECT
 FROM opportunities as o
 
 join opportunity_candidates as oc on o.id = oc.opportunity_id
-join opportunity_changes_history och on o.id = och.opportunity_id
+join opportunity_changes_history as och on o.id = och.opportunity_id
 
 WHERE true
     and o.objective <> 'Shared by an intermediary'
