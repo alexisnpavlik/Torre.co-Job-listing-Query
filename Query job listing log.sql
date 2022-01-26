@@ -38,6 +38,7 @@ FROM opportunities as o
 
 join opportunity_candidates as oc on o.id = oc.opportunity_id
 join opportunity_changes_history as och on o.id = och.opportunity_id
+inner join member_evaluations me on oc.interested = me.interested
 
 WHERE true
     and o.objective <> 'Shared by an intermediary'
