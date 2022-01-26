@@ -21,7 +21,8 @@ SELECT
     o.status as 'Status',
     o.last_updated as 'Changes history',
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed Applications',
-    sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as 'Incomplete applications'
+    sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as 'Incomplete applications',
+    sum(case when oc.id is not null and osh.hiring_date is not null then 1 else 0 end) as 'Hires'
     -- Pending for review
     -- Mutual matches
     -- Other
@@ -39,6 +40,7 @@ FROM opportunities as o
 
 join opportunity_candidates as oc on o.id = oc.opportunity_id
 join opportunity_changes_history as och on o.id = och.opportunity_id
+left join opportunity_stats_hires osh on o.id = osh.opportunity_id
 inner join member_evaluations me on oc.interested = me.interested
 
 WHERE true
