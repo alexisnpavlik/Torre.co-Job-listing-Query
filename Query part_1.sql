@@ -21,4 +21,4 @@ WHERE true
     and o.review = 'approved'
 group by o.id
 order by o.created desc
-LIMIT 1000;
+LIMIT 10000;
