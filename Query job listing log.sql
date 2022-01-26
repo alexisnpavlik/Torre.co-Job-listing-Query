@@ -15,6 +15,7 @@ SELECT
     o.locale as 'Language of the post',
     o.commitment_id as 'Type of job',
     o.fulfillment as 'Type of service',
+    och.created as 'Commited date',
     -- Recruiter_advisor,
     o.status as 'Status',
     o.last_updated as 'Changes history',
@@ -35,7 +36,8 @@ SELECT
 
 FROM opportunities as o
 
-left join opportunity_candidates as oc on o.id = oc.opportunity_id
+join opportunity_candidates as oc on o.id = oc.opportunity_id
+join opportunity_changes_history och on o.id = och.opportunity_id
 
 WHERE true
     and o.objective <> 'Shared by an intermediary'
