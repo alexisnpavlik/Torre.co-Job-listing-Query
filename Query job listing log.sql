@@ -5,6 +5,8 @@ SELECT
     o.objective as 'Job title',
     -- location
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
+    -- matches
+     (case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Match',
     -- Commit date
     och.created as 'Commited date',
     -- Created date 
@@ -21,7 +23,7 @@ SELECT
     o.status as 'Status',
     -- Account Manager
     p.username as 'Account manager',
-    -- filter 
+    -- Disqualified
      me.send_disqualified_notification  as 'data',
     -- Changes history, last updated
     o.last_updated as 'Changes history',
@@ -58,30 +60,3 @@ WHERE true
 
 group by o.id
 order by o.created desc;
-
-
-
-
-
-
-SELECT
-    o.id as ID_3,
-    me.send_disqualified_notification  as 'data'#
-    
-   
-
-FROM opportunities as o
-
-join opportunity_candidates as oc on o.id = oc.opportunity_id
-join member_evaluations as me on oc.id = me.member_id
-
-WHERE me.send_disqualified_notification = true#
-    and o.objective <> 'Shared by an intermediary'
-    and o.review = 'approved'
-    and o.reviewed is not null
-    
-    
-    
-group by o.id
-order by o.created desc
-LIMIT 10000;
