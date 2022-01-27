@@ -36,18 +36,18 @@ SELECT
 
 FROM opportunities as o
 
--- Necessary for completed applications and incomplete applications
-join opportunity_candidates as oc on o.id = oc.opportunity_id
--- Necessary for account manager
-join opportunity_changes_history as och on o.id = och.opportunity_id
--- Necessa
-left join person_account_managers as pam on och.person_id = pam.person_id
--- join to make the relation people-person_account_mannager
-left join people as p on pam.person_id = p.id
--- join to asign osh to get match dates
-left join opportunity_stats_hires osh on o.id = osh.opportunity_id
--- join to get member evaluation
-join member_evaluations as me on oc.id = me.member_id
+    -- Necessary for completed applications and incomplete applications
+    join opportunity_candidates as oc on o.id = oc.opportunity_id
+    -- Necessary for account manager
+    join opportunity_changes_history as och on o.id = och.opportunity_id
+    -- Necessa
+    left join person_account_managers as pam on och.person_id = pam.person_id
+    -- join to make the relation people-person_account_mannager
+    left join people as p on pam.person_id = p.id
+    -- join to asign osh to get match dates
+    left join opportunity_stats_hires osh on o.id = osh.opportunity_id
+    -- join to get member evaluation
+    join member_evaluations as me on oc.id = me.member_id
 
 
 WHERE true
