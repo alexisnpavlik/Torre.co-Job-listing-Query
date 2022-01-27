@@ -56,7 +56,7 @@ WHERE true
     and o.review = 'approved'
     -- Approved date is not null
     and o.reviewed is not null
-    and p.username in ("nataliaarrieta","danna73","josealdave","davidorban","srlondono","najarroa","andresmeza","danielaavila","natisropi","danielabotero","carolinamontoyaar","valentinasantosss","danigaviriaz24","jhonmarin1989","nellcacho","jhonmarin","diana_cujer","dianaaparicio ","edlombanal","danna73","paulamarulanda","pklozanom","melissa")
+    and p.username in ('catalinazarate12','juanfebog','jpinilla','cappadaniela27','laumariareyest','laurammedinag','diego19_franco35','inglisscardenas')
 
 group by o.id
 order by o.created desc;
