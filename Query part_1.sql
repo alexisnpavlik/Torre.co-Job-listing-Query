@@ -1,5 +1,7 @@
 SELECT
+    -- ID
     o.id as ID,
+    -- Job title
     o.objective as 'Job title',
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
     o.created as 'Created date',
