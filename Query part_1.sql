@@ -3,9 +3,13 @@ SELECT
     o.id as ID,
     -- Job title
     o.objective as 'Job title',
+    -- location
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
+    --Created date 
     o.created as 'Created date',
+    -- Approved date
     o.reviewed as 'Approved date',
+    -- Language of the post
     o.locale as 'Language of the post',
     o.commitment_id as 'Type of job',
     o.fulfillment as 'Type of service',
