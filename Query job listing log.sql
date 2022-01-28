@@ -24,7 +24,7 @@ SELECT
     -- Mutual matches
     (case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual Matches',
     -- Disqualified
-     me.send_disqualified_notification  as 'data',
+     me.send_disqualified_notification  as 'Disqualified',
     -- Changes history, last updated
     DATE(o.last_updated) as 'Last changes',
     -- Closing date
