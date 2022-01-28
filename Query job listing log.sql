@@ -5,24 +5,24 @@ SELECT
     o.objective as 'Job title',
     -- location
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
-    -- matches
-     (case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Match',
-    -- Commit date
-    och.created as 'Commited date',
-    -- Created date 
     o.created as 'Created date',
+    -- Created date 
     -- Approved date
     o.reviewed as 'Approved date',
-    -- Language of the post
-    o.locale as 'Language of the post',
+    -- Commit date
+    och.created as 'Commited date',
+    -- Account Manager
+    p.username as 'Account manager',
     -- Type of job
     o.commitment_id as 'Type of job',
     -- Type of service
     o.fulfillment as 'Type of service',
+    -- Language of the post
+    o.locale as 'Language of the post',
     -- Status
     o.status as 'Status',
-    -- Account Manager
-    p.username as 'Account manager',
+    -- Mutual matches
+    (case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual matches',
     -- Disqualified
      me.send_disqualified_notification  as 'data',
     -- Changes history, last updated
