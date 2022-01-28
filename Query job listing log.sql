@@ -6,11 +6,11 @@ SELECT
     -- location
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
     -- Created date 
-    o.created as 'Created date',
+    DATE(o.created) as 'Created date',
     -- Approved date
-    o.reviewed as 'Approved date',
+    DATE(o.reviewed) as 'Approved date',
     -- Commit date
-    och.created as 'Commited date',
+    DATE(och.created) as 'Commited date',
     -- Account Manager
     p.username as 'Account manager',
     -- Type of job
@@ -26,7 +26,7 @@ SELECT
     -- Disqualified
      me.send_disqualified_notification  as 'data',
     -- Changes history, last updated
-    o.last_updated as 'Changes history',
+    o.last_updated as 'Last changes',
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed Applications',
     -- Incomplete applications
