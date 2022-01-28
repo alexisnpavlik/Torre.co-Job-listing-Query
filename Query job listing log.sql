@@ -22,11 +22,13 @@ SELECT
     -- Status
     o.status as 'Status',
     -- Mutual matches
-    (case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual matches',
+    (case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual Matches',
     -- Disqualified
      me.send_disqualified_notification  as 'data',
     -- Changes history, last updated
     o.last_updated as 'Last changes',
+    -- Closing date
+    DATE(o.deadline) as 'Closing Date',
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed Applications',
     -- Incomplete applications
