@@ -5,8 +5,8 @@ SELECT
     o.objective as 'Job title',
     -- location
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
-    o.created as 'Created date',
     -- Created date 
+    o.created as 'Created date',
     -- Approved date
     o.reviewed as 'Approved date',
     -- Commit date
@@ -40,7 +40,7 @@ FROM opportunities as o
     join opportunity_candidates as oc on o.id = oc.opportunity_id
     -- Necessary for account manager
     join opportunity_changes_history as och on o.id = och.opportunity_id
-    -- Necessa
+    -- Necessary for account_mannager
     left join person_account_managers as pam on och.person_id = pam.person_id
     -- join to make the relation people-person_account_mannager
     left join people as p on pam.person_id = p.id
