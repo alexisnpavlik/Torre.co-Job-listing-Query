@@ -26,7 +26,7 @@ SELECT
     -- Disqualified
      me.send_disqualified_notification  as 'data',
     -- Changes history, last updated
-    o.last_updated as 'Last changes',
+    DATE(o.last_updated) as 'Last changes',
     -- Closing date
     DATE(o.deadline) as 'Closing Date',
     -- Completed applications
