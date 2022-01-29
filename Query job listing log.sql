@@ -1,6 +1,8 @@
 SELECT
     -- ID
     o.id as ID,
+    -- Sharing token
+    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
     -- Job title
     o.objective as 'Job title',
     -- location
@@ -43,12 +45,11 @@ SELECT
     and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)  as 'Active',
     -- Pending for review
-    (sum(case when oc.interested is not null then 1 else 0 end) - ( sum(case when me.interested is not null and oc.interested is not null then 1 else 0 end) + sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
+    ( sum(case when oc.interested is not null then 1 else 0 end) - ( sum(case when me.interested is not null and oc.interested is not null then 1 else 0 end) + sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end) + me.send_disqualified_notification ) ) as 'pending for review',
     -- Hires
-    DATE(osh.hiring_date) as 'Hires'
-
+    (osh.hiring_date) as 'Hires',
 
 FROM opportunities as o
 
@@ -68,7 +69,8 @@ FROM opportunities as o
     left join opportunity_columns oc2 on oc.column_id = oc2.id
     -- join to get calculations
     left join ( select me.candidate_id, max(me.interested) as last_interest, max(me.not_interested) as last_not_interest
-    
+    from member_evaluations me group by me.candidate_id) last_evaluation on last_evaluation.candidate_id = oc.id
+      
     
 
 WHERE true
