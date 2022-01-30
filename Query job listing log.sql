@@ -23,14 +23,15 @@ SELECT
     o.locale as 'Language of the post',
     -- Status
     o.status as 'Status',
-    -- Mutual matches
-    sum(case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual Matches',
-    -- Disqualified
-    sum(case when me.send_disqualified_notification is not null then 1 else 0 end)  as 'Disqualified',
     -- Changes history, last updated
     DATE(o.last_updated) as 'Last changes',
     -- Closing date
     DATE(o.deadline) as 'Closing Date',
+
+    -- Mutual matches
+    sum(case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual Matches',
+    -- Disqualified
+    sum(case when me.send_disqualified_notification is not null then 1 else 0 end)  as 'Disqualified',
     -- Completed applications
     sum(case when oc.interested is not null then 1 else 0 end) as 'Completed Applications',
     -- Incomplete applications
@@ -47,9 +48,11 @@ SELECT
     -- Pending for review
     ( sum(case when oc.interested is not null then 1 else 0 end) - ( sum(case when me.interested is not null and oc.interested is not null then 1 else 0 end) + sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name <> 'mutual matches'
-    and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end) + me.send_disqualified_notification ) ) as 'pending for review',
+    and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end) + me.send_disqualified_notification ) ) as 'Pending for review',
     -- Hires
     DATE(osh.hiring_date) as 'Hires',
+
+
     -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
 
