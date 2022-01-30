@@ -47,9 +47,9 @@ SELECT
     and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end) + me.send_disqualified_notification ) ) as 'pending for review',
     -- Hires
-    DATE(osh.hiring_date) as 'Hires'
+    DATE(osh.hiring_date) as 'Hires',
     -- Sharing token
-    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token',
+    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
 
 FROM opportunities as o
 
