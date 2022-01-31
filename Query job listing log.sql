@@ -14,7 +14,7 @@ SELECT
     -- Commit date
     DATE(och.created) as 'Commited date',
     -- Account Manager
-    p.username as 'Account manager',
+    p.name as 'Account manager',
     -- Type of job
     o.commitment_id as 'Type of job',
     -- Type of service
