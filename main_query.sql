@@ -33,7 +33,7 @@ SELECT
     -- Disqualified
     sum(case when me.send_disqualified_notification is not null then 1 else 0 end)  as 'Disqualified',
     -- Completed applications
-    sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications'
+    sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications',
     -- Incomplete applications
     sum(case when oc.created is not null then 1 else 0 end) as 'Incomplete applications',
     -- Others
