@@ -86,9 +86,6 @@ WHERE true
     #and me.send_disqualified_notification = true
     and o.objective <> 'Shared by an intermediary'
     and o.review = 'approved'
-    -- Approved date is not null
-    and o.reviewed is not null
-    and osh.hiring_date is not null
      and p.username is not null
 group by o.id
 order by o.created desc;
