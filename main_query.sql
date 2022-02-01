@@ -61,7 +61,7 @@ SELECT
     -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
 
-FROM opportunities as o ,
+FROM opportunities as o 
 
     -- Necessary for completed applications and incomplete applications
     left join opportunity_candidates oc on o.id = oc.opportunity_id
