@@ -59,7 +59,7 @@ SELECT
 FROM opportunities as o
 
     -- Necessary for completed applications and incomplete applications
-    join opportunity_candidates as oc on o.id = oc.opportunity_id
+    left join opportunity_candidates as oc on o.id = oc.opportunity_id
     -- Necessary for account manager
     join opportunity_changes_history as och on o.id = och.opportunity_id
     -- Necessary for account_mannager
