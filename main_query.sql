@@ -1,6 +1,6 @@
 SELECT
     -- ID
-    o.id as ID,
+    
     -- Job title
     o.objective as 'Job title',
     -- Company
