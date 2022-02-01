@@ -13,8 +13,8 @@ SELECT
     DATE(o.reviewed) as 'Approved date',
     -- Commit date
     DATE(och.created) as 'Commited date',
-    -- Account Manager
-    p.name as 'Account manager',
+    -- Applicant Acquisition Coordinator
+    p.name as 'Applicant Acquisition Coordinator',
     -- Type of job
     o.commitment_id as 'Type of job',
     -- Type of service
@@ -83,9 +83,9 @@ FROM opportunities as o
       
 
 WHERE true
-    #and me.send_disqualified_notification = true
+
     and o.objective <> 'Shared by an intermediary'
     and o.review = 'approved'
-     and p.username is not null
+    and p.username is not null
 group by o.id
 order by o.created desc;
