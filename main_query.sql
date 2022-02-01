@@ -32,8 +32,13 @@ SELECT
     sum(case when me.interested is not null and oc.interested is not null then 1 else 0 end) as 'Mutual Matches',
     -- Disqualified
     sum(case when me.send_disqualified_notification is not null then 1 else 0 end)  as 'Disqualified',
+   
+   
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications',
+   
+   
+   
     -- Incomplete applications
     sum(case when oc.created is not null then 1 else 0 end) as 'Incomplete applications',
     -- Others
@@ -56,10 +61,12 @@ SELECT
     -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
 
-FROM opportunities as o
+FROM opportunities as o ,
 
     -- Necessary for completed applications and incomplete applications
-    left join opportunity_candidates as oc on o.id = oc.opportunity_id
+    left join opportunity_candidates oc on o.id = oc.opportunity_id
+
+
     -- Necessary for account manager
     join opportunity_changes_history as och on o.id = och.opportunity_id
     -- Necessary for account_mannager
@@ -85,7 +92,7 @@ WHERE true
     -- Approved date is not null
     and o.reviewed is not null
     and osh.hiring_date is not null
-    and p.username in ('catalinazarate12','juanfebog','jpinilla','cappadaniela27','laumariareyest','laurammedinag','diego19_franco35','inglisscardenas')
+    and p.username in is not null
 
 group by o.id
 order by o.created desc;
