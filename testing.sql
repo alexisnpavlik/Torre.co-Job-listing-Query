@@ -22,14 +22,14 @@ SELECT
     -- Status
     o.status as 'Status',
     -- Completed applications
-    sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed applications',
+    sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications',
     -- Incomplete applications
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
-    -- Mutual matches
+    
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name = 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
-    as 'Mutual matches',
+    as 'mutual matches',
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
@@ -54,16 +54,25 @@ left join (
   select me.candidate_id, max(me.interested) as last_interest, max(me.not_interested) as last_not_interest
   from member_evaluations me
   group by me.candidate_id) last_evaluation on last_evaluation.candidate_id = oc.id
+ -- left join people as p on o.id = p.opportunity_id
+-- left join person_flags as pf on p.id=pf.person_id
 
 
 WHERE true
 
     and o.objective <> 'Shared by an intermediary'
     and review = 'approved'
-    and status ='open'
+    and status <> 'opening-soon'
     and applicant_coordinator_person_id is not null
+   -- Tester, bot and opportunity Craw Ler
+    and NOT o.`id` IN (
+        SELECT o2.`id`
+        FROM opportunities o2
+        JOIN opportunity_members om ON o2.`id` = om.`opportunity_id`
+        JOIN people p on om.`person_id` = p.`id`
+        JOIN person_flags pf on p.`id` = pf.`person_id`
+        WHERE om.`person_id` IN (82,2629) OR (om.`person_id` NOT IN (SELECT `id` FROM metrics_people) AND om.`poster`) OR (pf.opportunity_crawler AND om.poster))
     
- 
     
 group by o.id
 order by o.created desc;
