@@ -22,14 +22,14 @@ SELECT
     -- Status
     o.status as 'Status',
     -- Completed applications
-    sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications',
+    sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed applications',
     -- Incomplete applications
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
-    
+    -- Mutual matches
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name = 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
-    as 'mutual matches',
+    as 'Mutual matches',
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
