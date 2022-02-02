@@ -43,9 +43,10 @@ SELECT
     DATE(o.deadline) as 'Closing Date',
     o.locale as 'Language of the post',
      -- Sharing token
-    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
-    
-    
+    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token',
+    -- Hires
+    (select sum(case when osh.hiring_date is not null then 1 else 0 end)  + sum(case when osh.hiring_verified is not null then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires'
+  
    
 FROM opportunities o 
 LEFT JOIN opportunity_candidates oc on o.id=oc.opportunity_id
@@ -54,8 +55,6 @@ left join (
   select me.candidate_id, max(me.interested) as last_interest, max(me.not_interested) as last_not_interest
   from member_evaluations me
   group by me.candidate_id) last_evaluation on last_evaluation.candidate_id = oc.id
- -- left join people as p on o.id = p.opportunity_id
--- left join person_flags as pf on p.id=pf.person_id
 
 
 WHERE true
