@@ -11,8 +11,9 @@ SELECT
     DATE(o.created) as 'Created date',
     -- Approved date
     DATE(o.reviewed) as 'Approved date',
-   (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date'
-    
+   (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date',
+    -- Status
+    o.status as 'Status',
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications',
     -- Incomplete applications
@@ -28,7 +29,11 @@ SELECT
     as 'Other',
     sum(case when oc.id is not null and oc.interested is not null
     and (last_evaluation.last_not_interest is not null and (last_evaluation.last_interest is null or last_evaluation.last_interest < last_evaluation.last_not_interest)) then 1 else 0 end)
-    as 'interested disqualified',
+    as 'Disqualified',
+    -- Changes history, last updated
+    DATE(o.last_updated) as 'Last changes',
+    -- Closing date
+    DATE(o.deadline) as 'Closing Date'
    
 FROM opportunities o 
 LEFT JOIN opportunity_candidates oc on o.id=oc.opportunity_id
@@ -36,14 +41,16 @@ left join opportunity_columns oc2 on oc.column_id = oc2.id
 left join (
   select me.candidate_id, max(me.interested) as last_interest, max(me.not_interested) as last_not_interest
   from member_evaluations me
-  group by me.candidate_id
-) last_evaluation on last_evaluation.candidate_id = oc.id
+  group by me.candidate_id) last_evaluation on last_evaluation.candidate_id = oc.id
 
 
 WHERE true
 
     and o.objective <> 'Shared by an intermediary'
-    and o.review = 'approved'
+    and review = 'approved'
+   -- and status ='open'
+   -- and applicant_coordinator_person_id is not null
+    
     and o.id = 886966
     
 group by o.id
