@@ -7,11 +7,18 @@ SELECT
    (select organization_id from opportunity_organizations where opportunity_id =  o.id  group by organization_id limit 1) as 'Company_id',
     -- location
     (select group_concat(l.location) from opportunity_places l where l.opportunity_id = o.id and l.active = 1) as 'location',
+    -- Type of service
+    o.fulfillment as 'Type of service',
+    -- Type of job
+    o.commitment_id as 'Type of job',
    -- Created date 
     DATE(o.created) as 'Created date',
     -- Approved date
     DATE(o.reviewed) as 'Approved date',
-   (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date',
+    -- Applicant Acquisition Coordinator
+    (select name FROM people p WHERE o.applicant_coordinator_person_id=p.id) as 'Applicant Acquisition Coordinator',
+    -- Commited date
+    (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date',
     -- Status
     o.status as 'Status',
     -- Completed applications
@@ -35,12 +42,6 @@ SELECT
     -- Closing date
     DATE(o.deadline) as 'Closing Date',
     o.locale as 'Language of the post',
-    -- Type of service
-    o.fulfillment as 'Type of service',
-    -- Type of job
-    o.commitment_id as 'Type of job',
-    -- Applicant Acquisition Coordinator
-    (select name FROM people p WHERE o.applicant_coordinator_person_id=p.id),
      -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
     
