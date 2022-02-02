@@ -11,6 +11,7 @@ SELECT
     DATE(o.created) as 'Created date',
     -- Approved date
     DATE(o.reviewed) as 'Approved date',
+   (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date'
     
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'completed applications',
@@ -27,9 +28,7 @@ SELECT
     as 'Other',
     sum(case when oc.id is not null and oc.interested is not null
     and (last_evaluation.last_not_interest is not null and (last_evaluation.last_interest is null or last_evaluation.last_interest < last_evaluation.last_not_interest)) then 1 else 0 end)
-    as 'interested disqualified'
-   
-   
+    as 'interested disqualified',
    
 FROM opportunities o 
 LEFT JOIN opportunity_candidates oc on o.id=oc.opportunity_id
@@ -39,7 +38,7 @@ left join (
   from member_evaluations me
   group by me.candidate_id
 ) last_evaluation on last_evaluation.candidate_id = oc.id
-JOIN opportunity_changes_history as och on o.id = och.opportunity_id
+
 
 WHERE true
 
