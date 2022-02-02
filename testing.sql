@@ -33,7 +33,18 @@ SELECT
     -- Changes history, last updated
     DATE(o.last_updated) as 'Last changes',
     -- Closing date
-    DATE(o.deadline) as 'Closing Date'
+    DATE(o.deadline) as 'Closing Date',
+    o.locale as 'Language of the post',
+    -- Type of service
+    o.fulfillment as 'Type of service',
+    -- Type of job
+    o.commitment_id as 'Type of job',
+    -- Applicant Acquisition Coordinator
+    (select name FROM people p WHERE o.applicant_coordinator_person_id=p.id),
+     -- Sharing token
+    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
+    
+    
    
 FROM opportunities o 
 LEFT JOIN opportunity_candidates oc on o.id=oc.opportunity_id
@@ -48,10 +59,10 @@ WHERE true
 
     and o.objective <> 'Shared by an intermediary'
     and review = 'approved'
-   -- and status ='open'
-   -- and applicant_coordinator_person_id is not null
+    and status ='open'
+    and applicant_coordinator_person_id is not null
     
-    and o.id = 886966
+ 
     
 group by o.id
 order by o.created desc;
