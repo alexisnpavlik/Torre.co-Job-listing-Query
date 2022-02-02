@@ -13,8 +13,10 @@ SELECT
     DATE(o.reviewed) as 'Approved date',
     -- Commit date
     DATE(och.created) as 'Commited date',
+
     -- Applicant Acquisition Coordinator
     p.name as 'Applicant Acquisition Coordinator',
+
     -- Type of job
     o.commitment_id as 'Type of job',
     -- Type of service
@@ -72,6 +74,7 @@ FROM opportunities as o
     -- join to make the relation people-person_account_mannager
     left join people as p on pam.person_id = p.id
     -- join to asign osh to get match dates
+    
     left join opportunity_stats_hires osh on o.id = osh.opportunity_id
     -- join to get member evaluation
     join member_evaluations as me on oc.id = me.candidate_id
@@ -85,7 +88,12 @@ FROM opportunities as o
 WHERE true
 
     and o.objective <> 'Shared by an intermediary'
-    and o.review = 'approved'
-    and p.username is not null
+    and review = 'approved'
+    and status ='open'
+    and applicant_coordinator_person_id is not null
+
+
+
+
 group by o.id
 order by o.created desc;
