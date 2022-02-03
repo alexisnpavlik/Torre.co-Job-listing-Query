@@ -23,6 +23,8 @@ SELECT
     o.status as 'Status',
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed applications',
+    -- Completed applications yesterday
+    sum(case when oc.id is not null and oc.interested is not null and DATE(oc.created) = DATE(NOW() - INTERVAL 1 DAY) then 1 else 0 end) as 'Completed applications yesterday',
     -- Incomplete applications
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
     -- Mutual matches
@@ -44,9 +46,10 @@ SELECT
     o.locale as 'Language of the post',
     -- Hires
     (select sum(case when osh.hiring_date is not null then 1 else 0 end)  + sum(case when osh.hiring_verified is not null then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires',
-     -- Sharing token
+    -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
-   
+
+
 FROM opportunities o 
 LEFT JOIN opportunity_candidates oc on o.id=oc.opportunity_id
 left join opportunity_columns oc2 on oc.column_id = oc2.id
