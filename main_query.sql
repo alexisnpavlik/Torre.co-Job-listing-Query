@@ -27,15 +27,25 @@ SELECT
     sum(case when oc.id is not null and oc.interested is not null and DATE(oc.created) = DATE(NOW() - INTERVAL 1 DAY) then 1 else 0 end) as 'Completed applications yesterday',
     -- Incomplete applications
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
+    -- Incomplete applications yesterday
+    sum(case when oc.id is not null and oc.interested is null and application_step is not null and DATE(oc.created) = DATE(NOW() - INTERVAL 1 DAY) then 1 else 0 end) as 'Incomplete applications yesterday',
     -- Mutual matches
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name = 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Mutual matches',
+    -- Mutual matches yesterday
+    sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
+    and oc2.name = 'mutual matches'
+    and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest))
+    and DATE(oc.created) = DATE(NOW() - INTERVAL 1 DAY) then 1 else 0 end)
+    as 'Mutual matches yesterday',
+    -- Others
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Others',
+    -- Disqualified
     sum(case when oc.id is not null and oc.interested is not null
     and (last_evaluation.last_not_interest is not null and (last_evaluation.last_interest is null or last_evaluation.last_interest < last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Disqualified',
@@ -46,6 +56,8 @@ SELECT
     o.locale as 'Language of the post',
     -- Hires
     (select sum(case when osh.hiring_date is not null then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires',
+    -- Hires yesterday
+    (select sum(case when osh.hiring_date is not null and DATE(osh.hiring_date) = DATE(NOW() - INTERVAL 1 DAY) then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires yesterday',
     -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
 
