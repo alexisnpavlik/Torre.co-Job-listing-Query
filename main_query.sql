@@ -76,7 +76,6 @@ WHERE true
     and o.objective <> 'Shared by an intermediary'
     and review = 'approved'
     and status <> 'opening-soon'
-    and applicant_coordinator_person_id is not null
    -- Tester, bot and opportunity Craw Ler
     and NOT o.`id` IN (
         SELECT o2.`id`
