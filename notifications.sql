@@ -1,9 +1,7 @@
 select
-    distinct opportunity_ref as AlfaID,
-    count(distinct model = 'realistic') as realistic,
-    count(distinct model = 'signal_person_all') as person,
-    count(distinct model = 'signal_organization_all') as organization
-    
+    opportunity_ref as AlfaID,
+    sum(case when model = 'realistic' then 1 else 0 end) as realistic,
+    sum(case when model = 'signal_person_all' or model = 'signal_person_relevant' then 1 else 0 end) as people,
+    sum(case when model = 'signal_organization_all' or model = 'signal_organization_relevant' then 1 else 0 end) as organization
 from com_torrelabs_match_distributed_2
-
-group by AlfaID;
+group by AlfaID
