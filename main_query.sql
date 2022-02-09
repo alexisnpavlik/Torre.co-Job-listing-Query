@@ -55,7 +55,7 @@ SELECT
     DATE(o.deadline) as 'Closing Date',
     o.locale as 'Language of the post',
     -- Hires
-    (select sum(case when osh.hiring_date is not null then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires',
+    (select sum(case when osh.hiring_date is not null then 1 else null end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires',
     -- Hires yesterday
     (select sum(case when osh.hiring_date is not null and DATE(osh.hiring_date) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else null end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires yesterday',
     -- Sharing token
