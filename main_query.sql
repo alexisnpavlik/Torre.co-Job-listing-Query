@@ -71,20 +71,23 @@ left join (
   group by me.candidate_id) last_evaluation on last_evaluation.candidate_id = oc.id
 
 
-WHERE true
 
-    and o.objective <> 'Shared by an intermediary'
-    and review = 'approved'
-    and status <> 'opening-soon'
-   -- Tester, bot and opportunity Craw Ler
-    and NOT o.`id` IN (
-        SELECT o2.`id`
-        FROM opportunities o2
-        JOIN opportunity_members om ON o2.`id` = om.`opportunity_id`
-        JOIN people p on om.`person_id` = p.`id`
-        JOIN person_flags pf on p.`id` = pf.`person_id`
-        WHERE om.`person_id` IN (82,2629) OR (om.`person_id` NOT IN (SELECT `id` FROM metrics_people) AND om.`poster`) OR (pf.opportunity_crawler AND om.poster))
     
+WHERE
+    o.id IN (
+        SELECT
+            DISTINCT o.id AS opportunity_id
+        FROM
+            opportunities o 
+            INNER JOIN opportunity_members omp ON omp.opportunity_id = o.id
+            AND omp.poster = TRUE
+            INNER JOIN person_flags pf ON pf.person_id = omp.person_id
+            AND pf.opportunity_crawler = false
+            and o.review = 'approved'
+            and o.status <> 'opening-soon'
+            )
+    AND o.Objective not like '**%' 
+    AND o.created >= '2021-01-01'
     
-group by o.id
-order by o.created desc;
+GROUP BY o.id
+ORDER BY o.created desc;
