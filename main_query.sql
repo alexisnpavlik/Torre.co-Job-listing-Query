@@ -51,7 +51,7 @@ SELECT
     -- Hires yesterday
     (select sum(case when osh.hiring_date is not null and DATE(osh.hiring_date) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then true else null end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires yesterday',
     -- opportunity approved yesterday
-   sum(case when DATE(o.reviewed) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else null end) as 'Opportunity approved yesterday',
+   sum(case when DATE(o.reviewed) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then TRUE else null end) as 'Opportunity approved yesterday',
     -- Sharing token
     (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
 
