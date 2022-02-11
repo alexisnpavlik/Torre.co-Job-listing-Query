@@ -1,5 +1,5 @@
 select 
-    distinct(o.id) as opportunity_id,
+    distinct(o.id) as 'ID',
     count(p.name) as 'Invited from suggested'
 from opportunity_candidates oc
     inner join member_evaluations mem on mem.candidate_id = oc.id
