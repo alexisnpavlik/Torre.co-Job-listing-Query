@@ -1,0 +1,11 @@
+gspread==4.0.1
+gspread-dataframe==3.2.1
+google-api-python-client==2.18.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.4.1
+hashids==1.0.2
+hubspot-api-client==3.8.2
+simplejson==3.17.6
+delorean==1.0.0
+PyMySQL==1.0.2
+colab-env==0.2.0

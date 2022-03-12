@@ -23,6 +23,8 @@ SELECT
     (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date',
     -- Status
     o.status as 'Status',
+    -- Reason
+    (select Reason from opportunity_changes_history as och where true and type = 'close' and Reason is not null and o.id = och.opportunity_id order by och.created desc limit 1) as 'Reason',
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed applications',
     -- Completed applications yesterday
@@ -34,6 +36,13 @@ SELECT
     and oc2.name = 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Mutual matches',
+    -- Active
+    sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
+    and SUBSTRING(oc2.name, 1,2) <> '@ '
+    and SUBSTRING(oc2.name, 1,2) <> '#@'
+    and SUBSTRING(oc2.name, 1,2) <> '##'
+    and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
+    as 'Real Active',
     -- Others
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name <> 'mutual matches'
@@ -47,6 +56,9 @@ SELECT
     DATE(o.last_updated) as 'Last changes',
     -- Closing date
     DATE(o.deadline) as 'Closing Date',
+    -- Closed Date
+    (select DATE(och.created) from opportunity_changes_history as och where type = 'close' and o.id = och.opportunity_id group by och.opportunity_id) as 'Closed date',
+    -- Language
     o.locale as 'Language of the post',
     -- Hires
     (select sum(case when osh.hiring_date is not null then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires',
@@ -63,6 +75,7 @@ SELECT
 FROM opportunities o 
 LEFT JOIN opportunity_candidates oc on o.id=oc.opportunity_id
 left join opportunity_columns oc2 on oc.column_id = oc2.id
+
 left join (
   select me.candidate_id, max(me.interested) as last_interest, max(me.not_interested) as last_not_interest
   from member_evaluations me
