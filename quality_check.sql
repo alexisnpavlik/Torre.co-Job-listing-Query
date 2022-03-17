@@ -15,3 +15,4 @@ LEFT JOIN `tracking_code_candidates` `Tracking Code Candidates - Candidate` ON `
 LEFT JOIN `tracking_codes` `Tracking Codes` ON `Tracking Code Candidates - Candidate`.`tracking_code_id` = `Tracking Codes`.`id` 
 LEFT JOIN `people` `People` ON `Opportunity Candidates - Candidate`.`person_id` = `People`.`id`
 LEFT JOIN `opportunity_columns` `Opportunity columns - pipeline` ON `Opportunity Candidates - Candidate`.`column_id` = `Opportunity columns - pipeline`.`id`
+LIMIT 1048575
