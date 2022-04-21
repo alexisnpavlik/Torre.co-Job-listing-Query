@@ -23,4 +23,4 @@ FROM
 WHERE
     `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -262 day))
     AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
-GROUP BY 1
+GROUP BY `member_evaluations`.`candidate_id`,`Opportunity Candidates - Candidate`.`opportunity_id`
