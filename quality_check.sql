@@ -4,8 +4,8 @@ SELECT
     `People`.`username` AS `People__username`,
     `Comments`.`candidate_person_id` AS `candidate_person_id`,
     `Opportunity Candidates - Candidate`.`opportunity_id` AS `Opportunity ID`,
-    `Opportunity Candidates - Candidate`.`interested` AS `interested`,
-    `member_evaluations`.`not_interested` AS `not_interested`,
+    max(`Opportunity Candidates - Candidate`.`interested`) AS `interested`,
+    max(`member_evaluations`.`not_interested`) AS `not_interested`,
     `member_evaluations`.`reason` AS `reason`,
     `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
     `Opportunity Columns - Column`.`name` AS `Pipeline`,
@@ -23,3 +23,4 @@ FROM
 WHERE
     `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -262 day))
     AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
+GROUP BY 1
