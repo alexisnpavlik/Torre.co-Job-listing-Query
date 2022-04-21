@@ -2,14 +2,15 @@ SELECT
     `member_evaluations`.`candidate_id` AS `candidate_id`,
     `People`.`name` AS `People__name`,
     `People`.`username` AS `People__username`,
-    `People`.`id` AS `People__id`,
+    `Comments`.`candidate_person_id` AS `candidate_person_id`,
     `Opportunity Candidates - Candidate`.`opportunity_id` AS `Opportunity ID`,
     `Opportunity Candidates - Candidate`.`interested` AS `interested`,
     `member_evaluations`.`not_interested` AS `not_interested`,
     `member_evaluations`.`reason` AS `reason`,
     `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
     `Opportunity Columns - Column`.`name` AS `Pipeline`,
-    `Member Evaluation Feedback - Feedback`.`feedback` AS `Reason - Others`
+    `Member Evaluation Feedback - Feedback`.`feedback` AS `Reason - Others`,
+    `Comments`.`text` AS `Notes`
 FROM
     `member_evaluations`
     LEFT JOIN `opportunity_candidates` `Opportunity Candidates - Candidate` ON `member_evaluations`.`candidate_id` = `Opportunity Candidates - Candidate`.`id`
@@ -18,5 +19,7 @@ FROM
     LEFT JOIN `people` `People` ON `Opportunity Candidates - Candidate`.`person_id` = `People`.`id`
     LEFT JOIN `opportunity_columns` `Opportunity Columns - Column` ON `Opportunity Candidates - Candidate`.`column_id` = `Opportunity Columns - Column`.`id`
     LEFT JOIN `member_evaluation_feedback` `Member Evaluation Feedback - Feedback` ON `member_evaluations`.`feedback_id` = `Member Evaluation Feedback - Feedback`.`id`
+    LEFT JOIN `comments` `Comments` ON `People`.`id` = `Comments`.`candidate_person_id`
 WHERE
     `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -262 day))
+    AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
