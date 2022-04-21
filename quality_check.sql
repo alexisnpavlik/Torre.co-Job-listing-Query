@@ -6,10 +6,10 @@ SELECT
     `Opportunity Candidates - Candidate`.`opportunity_id` AS `Opportunity ID`,
     max(`Opportunity Candidates - Candidate`.`interested`) AS `interested`,
     max(`member_evaluations`.`not_interested`) AS `not_interested`,
-    `member_evaluations`.`reason` AS `reason`,
+    max(`member_evaluations`.`reason`) AS `reason`,
     `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
     `Opportunity Columns - Column`.`name` AS `Pipeline`,
-    `Member Evaluation Feedback - Feedback`.`feedback` AS `Reason - Others`,
+    max(`Member Evaluation Feedback - Feedback`.`feedback`) AS `Reason - Others`,
     `Comments`.`text` AS `Notes`
 FROM
     `member_evaluations`
