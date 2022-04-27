@@ -1,6 +1,6 @@
 SELECT
-    date(`Member Evaluations`.`interested`) AS `date_src`,
-    `source`.`Tracking Codes__utm_campaign` AS `utm_campaign_src`,
+    date(`Member Evaluations`.`interested`) AS `date_src_mm`,
+    `source`.`Tracking Codes__utm_campaign` AS `utm_campaign_src_mm`,
     count(distinct `source`.`id`) AS `count_mm_src`
 FROM
     (
