@@ -33,7 +33,7 @@ FROM
 WHERE
     (
         `Member Evaluations`.`interested` IS NOT NULL
-        AND `Member Evaluations`.`interested` >= date(date_add(now(6), INTERVAL -180 day))
+        AND `Member Evaluations`.`interested` >= date(date_add(now(6), INTERVAL -60 day))
         AND `Member Evaluations`.`interested` < date(date_add(now(6), INTERVAL 1 day))
         AND (
             `source`.`Tracking Codes__utm_campaign` = 'fpa'
