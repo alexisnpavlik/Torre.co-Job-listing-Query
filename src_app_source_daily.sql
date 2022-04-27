@@ -1,7 +1,7 @@
 SELECT
-    date(`source`.`interested`) AS `date`,
-    `source`.`Tracking Codes__utm_source` AS `utm_source`,
-    count(distinct `source`.`id`) AS `count_app`
+    date(`source`.`interested`) AS `date_src`,
+    `source`.`Tracking Codes__utm_source` AS `utm_source_src`,
+    count(distinct `source`.`id`) AS `count_app_src`
 FROM
     (
         SELECT

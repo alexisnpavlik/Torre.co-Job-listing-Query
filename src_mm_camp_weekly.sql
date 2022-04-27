@@ -1,7 +1,7 @@
 SELECT
-    str_to_date(concat(yearweek(`Member Evaluations`.`interested`),' Sunday'),'%X%V %W') AS `date`,
-    `source`.`Tracking Codes__utm_campaign` AS `utm_campaign`,
-    count(distinct `source`.`id`) AS `count_mm`
+    str_to_date(concat(yearweek(`Member Evaluations`.`interested`),' Sunday'),'%X%V %W') AS `date_src`,
+    `source`.`Tracking Codes__utm_campaign` AS `utm_campaign_src`,
+    count(distinct `source`.`id`) AS `count_mm_src`
 FROM
     (
         SELECT
