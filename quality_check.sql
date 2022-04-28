@@ -21,5 +21,5 @@ FROM
     LEFT JOIN `member_evaluation_feedback` `Member Evaluation Feedback - Feedback` ON `member_evaluations`.`feedback_id` = `Member Evaluation Feedback - Feedback`.`id`
     LEFT JOIN `comments` `Comments` ON `People`.`id` = `Comments`.`candidate_person_id` AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
 WHERE
-    `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -200 day))
+    `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -180 day))
 GROUP BY `member_evaluations`.`candidate_id`,`Opportunity Candidates - Candidate`.`opportunity_id`
