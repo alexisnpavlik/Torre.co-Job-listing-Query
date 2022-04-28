@@ -36,18 +36,19 @@ WHERE
         AND `source`.`interested` >= date(date_add(now(6), INTERVAL -60 day))
         AND `source`.`interested` < date(date_add(now(6), INTERVAL 1 day))
         AND (
-            `source`.`Tracking Codes__utm_campaign` = 'admp'
-            OR `source`.`Tracking Codes__utm_campaign` = 'mfp'
-            OR `source`.`Tracking Codes__utm_campaign` = 'jngd'
-            OR `source`.`Tracking Codes__utm_campaign` = 'dncg'
-            OR `source`.`Tracking Codes__utm_campaign` = 'jmmg'
-            OR `source`.`Tracking Codes__utm_campaign` = 'mmag'
-            OR `source`.`Tracking Codes__utm_campaign` = 'rrp'
-            OR `source`.`Tracking Codes__utm_campaign` = 'mabv'
-            OR `source`.`Tracking Codes__utm_campaign` = 'gco'
-            OR `source`.`Tracking Codes__utm_campaign` = 'smnb'
+            `source`.`Tracking Codes__utm_campaign` = 'lfpa'
             OR `source`.`Tracking Codes__utm_campaign` = 'mmor'
-            OR `source`.`Tracking Codes__utm_campaign` = 'fpa'
+            OR `source`.`Tracking Codes__utm_campaign` = 'smnb'
+            OR `source`.`Tracking Codes__utm_campaign` = 'gco'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mabv'
+            OR `source`.`Tracking Codes__utm_campaign` = 'rrp'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mmag'
+            OR `source`.`Tracking Codes__utm_campaign` = 'jmmg'
+            OR `source`.`Tracking Codes__utm_campaign` = 'dncg'
+            OR `source`.`Tracking Codes__utm_campaign` = 'jngd'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mfp'
+            OR `source`.`Tracking Codes__utm_campaign` = 'admp'
+            OR `source`.`Tracking Codes__utm_campaign` = 'kjem'
         )
     )
 GROUP BY

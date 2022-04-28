@@ -36,7 +36,7 @@ WHERE
         AND `Member Evaluations`.`interested` >= date(date_add(now(6), INTERVAL -60 day))
         AND `Member Evaluations`.`interested` < date(date_add(now(6), INTERVAL 1 day))
         AND (
-            `source`.`Tracking Codes__utm_campaign` = 'fpa'
+            `source`.`Tracking Codes__utm_campaign` = 'lfpa'
             OR `source`.`Tracking Codes__utm_campaign` = 'mmor'
             OR `source`.`Tracking Codes__utm_campaign` = 'smnb'
             OR `source`.`Tracking Codes__utm_campaign` = 'gco'
@@ -48,6 +48,7 @@ WHERE
             OR `source`.`Tracking Codes__utm_campaign` = 'jngd'
             OR `source`.`Tracking Codes__utm_campaign` = 'mfp'
             OR `source`.`Tracking Codes__utm_campaign` = 'admp'
+            OR `source`.`Tracking Codes__utm_campaign` = 'kjem'
         )
     )
 GROUP BY
