@@ -19,8 +19,7 @@ FROM
     LEFT JOIN `people` `People` ON `Opportunity Candidates - Candidate`.`person_id` = `People`.`id`
     LEFT JOIN `opportunity_columns` `Opportunity Columns - Column` ON `Opportunity Candidates - Candidate`.`column_id` = `Opportunity Columns - Column`.`id`
     LEFT JOIN `member_evaluation_feedback` `Member Evaluation Feedback - Feedback` ON `member_evaluations`.`feedback_id` = `Member Evaluation Feedback - Feedback`.`id`
-    LEFT JOIN `comments` `Comments` ON `People`.`id` = `Comments`.`candidate_person_id`
+    LEFT JOIN `comments` `Comments` ON `People`.`id` = `Comments`.`candidate_person_id` AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
 WHERE
     `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -262 day))
-    AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
 GROUP BY `member_evaluations`.`candidate_id`,`Opportunity Candidates - Candidate`.`opportunity_id`
