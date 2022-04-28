@@ -49,6 +49,19 @@ WHERE
             OR `source`.`Tracking Codes__utm_campaign` = 'mfp'
             OR `source`.`Tracking Codes__utm_campaign` = 'admp'
             OR `source`.`Tracking Codes__utm_campaign` = 'kjem'
+            OR `source`.`Tracking Codes__utm_campaign` = 'lfpa_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mmor_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'smnb_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'gco_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mabv_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'rrp_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mmag_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'jmmg_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'dncg_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'jngd_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'mfp_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'admp_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'kjem_ra'
         )
     )
 GROUP BY
