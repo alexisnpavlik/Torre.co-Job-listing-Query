@@ -1,5 +1,5 @@
 SELECT
-    TRIM('"'FROM JSON_EXTRACT(`notifications`.`context`, '$.opportunityId')) as `AlfaID`,
+    TRIM('"'FROM JSON_EXTRACT(`notifications`.`context`, '$.opportunityId')) as `Alfa ID`,
     count(*) as `rc_src_notifications`
 FROM
     `notifications`
