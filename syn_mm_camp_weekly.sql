@@ -6,6 +6,7 @@ FROM
     (
         SELECT
             `opportunity_candidates`.`id` AS `id`,
+            `opportunity_candidates`.`interested` AS `interested`,
             `Tracking Code Candidates`.`id` AS `Tracking Code Candidates__id`,
             `Tracking Codes`.`utm_campaign` AS `Tracking Codes__utm_campaign`,
             `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
@@ -35,6 +36,7 @@ WHERE
         `Member Evaluations`.`interested` IS NOT NULL
         AND `Member Evaluations`.`interested` >= date(date_add(now(6), INTERVAL -60 day))
         AND `Member Evaluations`.`interested` < date(date_add(now(6), INTERVAL 1 day))
+        AND date(`Member Evaluations`.`interested`) = date(`source`.`interested`)
         AND (
             `source`.`Tracking Codes__utm_campaign` = 'jams'
             OR `source`.`Tracking Codes__utm_campaign` = 'lfrr'
