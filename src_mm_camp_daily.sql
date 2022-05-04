@@ -35,7 +35,6 @@ WHERE
         `Member Evaluations`.`interested` IS NOT NULL
         AND `Member Evaluations`.`interested` >= date(date_add(now(6), INTERVAL -30 day))
         AND `Member Evaluations`.`interested` < date(date_add(now(6), INTERVAL 1 day))
-        AND date(`Member Evaluations`.`interested`) = date(`opportunity_candidates`.`interested`)
         AND (
             `source`.`Tracking Codes__utm_campaign` = 'lfpa'
             OR `source`.`Tracking Codes__utm_campaign` = 'mmor'

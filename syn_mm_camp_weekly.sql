@@ -35,7 +35,6 @@ WHERE
         `Member Evaluations`.`interested` IS NOT NULL
         AND `Member Evaluations`.`interested` >= date(date_add(now(6), INTERVAL -60 day))
         AND `Member Evaluations`.`interested` < date(date_add(now(6), INTERVAL 1 day))
-        AND str_to_date(concat(yearweek(`Member Evaluations`.`interested`),' Sunday'),'%X%V %W') = str_to_date(concat(yearweek(`opportunity_candidates`.`interested`), ' Sunday'),'%X%V %W')
         AND (
             `source`.`Tracking Codes__utm_campaign` = 'jams'
             OR `source`.`Tracking Codes__utm_campaign` = 'lfrr'
