@@ -19,6 +19,8 @@ SELECT
     DATE(o.reviewed) as 'Approved date',
     -- Applicant Acquisition Coordinator
     (select name FROM people p WHERE o.applicant_coordinator_person_id=p.id) as 'Applicant Acquisition Coordinator',
+    -- DR 
+    (select p.name from opportunity_members omp left join people p on omp.person_id = p.id where omp.tso_operator = TRUE and omp.opportunity_id = o.id) as 'Ticket Owner',
     -- Commited date
     (select DATE(och.created) FROM opportunity_changes_history och WHERE och.opportunity_id = o.id group by opportunity_id ) as 'Commited date',
     -- Status
@@ -84,8 +86,6 @@ left join (
   group by me.candidate_id) last_evaluation on last_evaluation.candidate_id = oc.id
 
 
-
-    
 WHERE true
     and o.id IN (
         SELECT
