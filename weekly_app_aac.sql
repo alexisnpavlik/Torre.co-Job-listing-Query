@@ -1,7 +1,7 @@
 SELECT
     str_to_date(concat(yearweek(`source`.`interested`), ' Sunday'),'%X%V %W') AS `date`,
     `source`.`People_name` AS `AAC_name`,
-    count(distinct `source`.`id`) AS `count_daily_app`
+    count(distinct `source`.`id`) AS `count_weekly_app`
 FROM
     (
         SELECT
