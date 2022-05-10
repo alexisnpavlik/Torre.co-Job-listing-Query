@@ -39,9 +39,7 @@ WHERE
             `source`.`Tracking Codes__utm_campaign` = 'jams'
             OR `source`.`Tracking Codes__utm_campaign` = 'lfrr'
             OR `source`.`Tracking Codes__utm_campaign` = 'mmam'
-            OR `source`.`Tracking Codes__utm_campaign` = 'jams_ra'
-            OR `source`.`Tracking Codes__utm_campaign` = 'lfrr_ra'
-            OR `source`.`Tracking Codes__utm_campaign` = 'mmam_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'cals'
         )
     )
 GROUP BY
