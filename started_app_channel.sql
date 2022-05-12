@@ -1,5 +1,4 @@
 select
-    date(opportunity_candidates.created) as date,
     o.id as ID,
     IF(ISNULL(interested), 'started', 'finished') as finished,
     tc.utm_medium as UTM,
@@ -44,4 +43,4 @@ where
         'ja_rlvsgl_org',
         'ja_allsgl_org'
     )
-group by date,ID,finished,UTM
+group by ID,finished,UTM
