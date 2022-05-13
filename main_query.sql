@@ -101,6 +101,7 @@ WHERE true
             )
     AND o.Objective not like '**%' 
     AND o.created >= '2021-01-01'
+    AND o.active = TRUE
     
 GROUP BY o.id
 ORDER BY o.created desc;
