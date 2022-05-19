@@ -5,3 +5,4 @@ select
     sum(case when model = 'signal_organization_all' or model = 'signal_organization_relevant' then 1 else 0 end) as organization
 from com_torrelabs_match_distributed_3
 group by AlfaID
+
