@@ -18,16 +18,6 @@ FROM
             LEFT JOIN `person_flags` `Person Flags - Person` ON `Opportunity Members - Opportunity`.`person_id` = `Person Flags - Person`.`person_id`
             LEFT JOIN `opportunities` `Opportunities` ON `opportunity_candidates`.`opportunity_id` = `Opportunities`.`id`
             LEFT JOIN `people` `People` ON `Opportunities`.`applicant_coordinator_person_id` = `People`.`id`
-        WHERE
-            (
-                `Person Flags - Person`.`opportunity_crawler` = FALSE
-                AND `Opportunity Members - Opportunity`.`poster` = TRUE
-                AND (
-                    NOT (lower(`People`.`username`) like '%test%')
-                    OR `People`.`username` IS NULL
-                )
-                AND `opportunity_candidates`.`retracted` IS NULL
-            )
     ) `source`
 WHERE
     `source`.`remote` = TRUE
