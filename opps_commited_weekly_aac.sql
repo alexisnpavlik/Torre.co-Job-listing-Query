@@ -13,7 +13,6 @@ WHERE
         AND `opportunities__via__opportunit`.`reviewed` > "2021-7-18"
         AND `opportunities__via__opportunit`.`reviewed` < date(now(6))
         AND `opportunities__via__opportunit`.`remote` = TRUE
-        AND date(`opportunity_changes_history`.`created`) = date(`opportunities__via__opportunit`.`reviewed`)
     )
 GROUP BY
     str_to_date(concat(yearweek(`opportunity_changes_history`.`created`),'Sunday'),'%X%V %W'),
