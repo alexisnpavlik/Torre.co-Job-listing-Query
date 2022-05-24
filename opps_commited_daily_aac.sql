@@ -1,5 +1,5 @@
 SELECT
-    date(`opportunity_changes_history`.`created`) AS `date`,
+    date(`opportunities__via__opportunit`.`reviewed`) AS `date`,
     `people`.`name` AS `AAC`,
     count(distinct `opportunity_changes_history`.`opportunity_id`) AS `opps_commited_daily_remote`
 FROM
@@ -8,14 +8,16 @@ FROM
     LEFT JOIN `people` ON `opportunities__via__opportunit`.`applicant_coordinator_person_id`= `people`.`id`
 WHERE
     (
-        `opportunity_changes_history`.`type` = 'outbound'
-        AND `opportunity_changes_history`.`value` = 0
+        (
+            `opportunity_changes_history`.`type` = 'outbound'
+            AND `opportunity_changes_history`.`value` = false
+        )
         AND `opportunities__via__opportunit`.`reviewed` > "2021-7-18"
         AND `opportunities__via__opportunit`.`reviewed` < date(now(6))
         AND `opportunities__via__opportunit`.`remote` = TRUE
     )
 GROUP BY
-    date(`opportunity_changes_history`.`created`),
+    date(`opportunities__via__opportunit`.`reviewed`),
     `people`.`name`
 ORDER BY
-    date(`opportunity_changes_history`.`created`) ASC
+    date(`opportunities__via__opportunit`.`reviewed`) ASC
