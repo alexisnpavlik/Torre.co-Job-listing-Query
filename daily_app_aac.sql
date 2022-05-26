@@ -1,11 +1,12 @@
 SELECT
     date(`source`.`interested`) AS `date`,
     `source`.`People_name` AS `AAC_name`,
-    count(distinct `source`.`id`) AS `count_daily_app`
+    count(distinct `source`.`person_id`) AS `count_daily_app`
 FROM
     (
         SELECT
             `opportunity_candidates`.`id` AS `id`,
+            `opportunity_candidates`.`person_id` AS `person_id`,
             `opportunity_candidates`.`interested` AS `interested`,
             `People`.`name` AS `People_name`,
             `Opportunities`.`remote` AS `remote`,
@@ -21,7 +22,7 @@ FROM
     ) `source`
 WHERE
     `source`.`remote` = TRUE
-    AND `source`.`interested` >= date(date_add(now(6), INTERVAL -360 day))
+    AND `source`.`interested` >= date(date_add(now(6), INTERVAL -30 day))
     AND `source`.`interested` < date(date_add(now(6), INTERVAL 1 day))
 GROUP BY
     date(`source`.`interested`),

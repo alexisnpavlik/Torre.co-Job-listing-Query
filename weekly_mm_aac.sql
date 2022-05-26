@@ -1,11 +1,12 @@
 SELECT
     str_to_date(concat(yearweek(`Member Evaluations`.`interested`), ' Sunday'),'%X%V %W') AS `date`,
     `source`.`People_name` AS `AAC_name`,
-    count(distinct `source`.`id`) AS `count_weekly_mm`
+    count(distinct `source`.`person_id`) AS `count_weekly_mm`
 FROM
     (
         SELECT
             `opportunity_candidates`.`id` AS `id`,
+            `opportunity_candidates`.`person_id` AS `person_id`,
             `opportunity_candidates`.`interested` AS `interested`,
             `People`.`name` AS `People_name`,
             `Opportunities`.`remote` AS `remote`

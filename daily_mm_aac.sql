@@ -1,11 +1,12 @@
 SELECT
     date(`Member Evaluations`.`interested`) AS `date`,
     `source`.`People_name` AS `AAC_name`,
-    count(distinct `source`.`id`) AS `count_daily_mm`
+    count(distinct `source`.`person_id`) AS `count_daily_mm`
 FROM
     (
         SELECT
             `opportunity_candidates`.`id` AS `id`,
+            `opportunity_candidates`.`person_id` AS `person_id`,
             `opportunity_candidates`.`interested` AS `interested`,
             `People`.`name` AS `People_name`,
             `Opportunities`.`remote` AS `remote`
@@ -23,7 +24,7 @@ WHERE
     (
         `Member Evaluations`.`interested` IS NOT NULL
         AND `source`.`remote` = TRUE
-        AND `source`.`interested` >= date(date_add(now(6), INTERVAL -360 day))
+        AND `source`.`interested` >= date(date_add(now(6), INTERVAL -30 day))
         AND `source`.`interested` < date(date_add(now(6), INTERVAL 1 day))
         AND date(`Member Evaluations`.`interested`) = date(`source`.`interested`)
     )
