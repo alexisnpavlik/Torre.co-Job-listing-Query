@@ -45,6 +45,8 @@ SELECT
     and SUBSTRING(oc2.name, 1,2) <> '@ '
     and SUBSTRING(oc2.name, 1,2) <> '#@'
     and SUBSTRING(oc2.name, 1,2) <> '##'
+    and oc2.name <> 'Hire'
+    and oc2.name <> 'Contratados'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Real Active',
     -- Others
