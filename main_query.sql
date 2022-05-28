@@ -19,6 +19,7 @@ SELECT
     DATE(o.created) as 'Created date',
     -- Approved date
     DATE(o.reviewed) as 'Approved date',
+    o.review as 'Approved',
     -- Applicant Acquisition Coordinator
     (select name FROM people p WHERE o.applicant_coordinator_person_id=p.id) as 'Applicant Acquisition Coordinator',
     -- DR 
