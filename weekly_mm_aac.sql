@@ -1,6 +1,6 @@
 SELECT
-    str_to_date(concat(yearweek(`Member Evaluations`.`interested`), ' Sunday'),'%X%V %W') AS `date`,
-    `source`.`People_name` AS `AAC_name`,
+    str_to_date(concat(yearweek(`source`.`mm_interested`), ' Sunday'),'%X%V %W') AS `date_weekly`,
+    `source`.`People_name` AS `AAC_weekly`,
     count(distinct `source`.`person_id`) AS `count_weekly_mm`
 FROM
     (
@@ -8,6 +8,7 @@ FROM
             `opportunity_candidates`.`id` AS `id`,
             `opportunity_candidates`.`person_id` AS `person_id`,
             `opportunity_candidates`.`interested` AS `interested`,
+            `Member Evaluations`.`interested` AS `mm_interested`,
             `People`.`name` AS `People_name`,
             `Opportunities`.`remote` AS `remote`
         FROM
@@ -18,18 +19,18 @@ FROM
             LEFT JOIN `person_flags` `Person Flags - Person` ON `Opportunity Members - Opportunity`.`person_id` = `Person Flags - Person`.`person_id`
             LEFT JOIN `opportunities` `Opportunities` ON `opportunity_candidates`.`opportunity_id` = `Opportunities`.`id`
             LEFT JOIN `people` `People` ON `Opportunities`.`applicant_coordinator_person_id` = `People`.`id`
+            LEFT JOIN `member_evaluations` `Member Evaluations` ON `opportunity_candidates`.`id` = `Member Evaluations`.`candidate_id`
     ) `source`
-    LEFT JOIN `member_evaluations` `Member Evaluations` ON `source`.`id` = `Member Evaluations`.`candidate_id`
 WHERE
     (
-        `Member Evaluations`.`interested` IS NOT NULL
+        `source`.`interested` IS NOT NULL
         AND `source`.`remote` = TRUE
         AND `source`.`interested` >= date(date_add(now(6), INTERVAL -360 day))
         AND `source`.`interested` < date(date_add(now(6), INTERVAL 1 day))
-        AND str_to_date(concat(yearweek(`Member Evaluations`.`interested`), ' Sunday'),'%X%V %W') = str_to_date(concat(yearweek(`source`.`interested`), ' Sunday'),'%X%V %W')
+        AND str_to_date(concat(yearweek(`source`.`mm_interested`), ' Sunday'),'%X%V %W') = str_to_date(concat(yearweek(`source`.`interested`), ' Sunday'),'%X%V %W')
     )
 GROUP BY
-    str_to_date(concat(yearweek(`Member Evaluations`.`interested`), ' Sunday'),'%X%V %W'),
+    str_to_date(concat(yearweek(`source`.`mm_interested`), ' Sunday'),'%X%V %W'),
     `source`.`People_name`
 ORDER BY
-    str_to_date(concat(yearweek(`Member Evaluations`.`interested`), ' Sunday'),'%X%V %W') ASC
+    str_to_date(concat(yearweek(`source`.`mm_interested`), ' Sunday'),'%X%V %W') ASC
