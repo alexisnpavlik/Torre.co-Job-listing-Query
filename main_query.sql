@@ -33,7 +33,7 @@ SELECT
     -- Completed applications
     sum(case when oc.id is not null and oc.interested is not null then 1 else 0 end) as 'Completed applications',
     -- Completed applications yesterday
-    sum(case when oc.id is not null and oc.interested is not null and DATE(oc.created) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else 0 end) as 'Completed applications yesterday',
+    sum(case when oc.id is not null and oc.interested is not null and DATE(oc.interested) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else 0 end) as 'Completed applications yesterday',
     -- Incomplete applications
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
     -- Mutual matches
