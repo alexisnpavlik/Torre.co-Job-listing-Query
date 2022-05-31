@@ -1,6 +1,6 @@
 SELECT
-    str_to_date(concat(yearweek(`source`.`mm_interested`), ' Sunday'),'%X%V %W') AS `date_weekly`,
-    `source`.`People_name` AS `AAC_weekly`,
+    str_to_date(concat(yearweek(`source`.`mm_interested`), ' Sunday'),'%X%V %W') AS `date`,
+    `source`.`People_name` AS `AAC_name`,
     count(distinct `source`.`person_id`) AS `count_weekly_mm`
 FROM
     (

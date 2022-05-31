@@ -1,6 +1,6 @@
 SELECT
     date(`source`.`mm_interested`) AS `date`,
-    `source`.`People_name` AS `AAC_daily`,
+    `source`.`People_name` AS `AAC_name`,
     count(distinct `source`.`person_id`) AS `count_daily_mm`
 FROM
     (
