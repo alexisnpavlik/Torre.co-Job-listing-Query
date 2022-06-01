@@ -1,18 +1,11 @@
 SELECT
     ID,
+    GREATEST(ifnull(years, 0), ifnull(prof_years, 0)) AS max_years,
     CASE
-        years
-        WHEN 0 THEN 'potential-to-develop'
-        WHEN 1 THEN '1-plus-year'
-        WHEN 2 THEN '2-plus-years'
-        WHEN 3 THEN '3-plus-years'
-        WHEN 5 THEN '5-plus-years'
-        WHEN 10 THEN '10-plus-years'
-    END AS experience,
-    CASE
-        prof_years
-        WHEN -1 THEN ''
+        GREATEST(ifnull(years, 0), ifnull(prof_years, 0))
+        WHEN 0 THEN 'novice'
         WHEN 1 THEN 'novice'
+        WHEN 2 THEN 'novice'
         WHEN 3 THEN 'proficient'
         WHEN 5 THEN 'expert'
         WHEN 10 THEN 'master'
@@ -53,7 +46,7 @@ FROM
                 AND ostr.proficiency = ''
             )
             AND o.objective NOT LIKE '**%'
-            AND o.reviewed >= '2021/01/01'
+            AND o.reviewed >= '2021/06/01'
             AND o.review = 'approved'
         GROUP BY
             o.id
