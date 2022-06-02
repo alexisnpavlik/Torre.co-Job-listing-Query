@@ -104,8 +104,9 @@ WHERE true
             AND pf.opportunity_crawler = false
             and o.review = 'approved'
             and o.status <> 'opening-soon'
+            AND o.fulfillment <> 'ats' 
             )
-    AND o.Objective not like '**%' 
+    AND o.Objective not like '**%'
     AND o.created >= '2021-01-01'
     AND o.active = TRUE
     
