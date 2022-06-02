@@ -1,3 +1,4 @@
+/* AA : Sonic : daily mm by aac: prod */ 
 SELECT
     date(`source`.`mm_interested`) AS `date`,
     `source`.`People_name` AS `AAC_name`,

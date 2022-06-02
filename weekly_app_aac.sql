@@ -1,3 +1,4 @@
+/* AA : Sonic : weekly app by aac: prod */ 
 SELECT
     str_to_date(concat(yearweek(`source`.`interested`), ' Sunday'),'%X%V %W') AS `date`,
     `source`.`People_name` AS `AAC_name`,

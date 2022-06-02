@@ -1,3 +1,4 @@
+/* AA : Sonic : autotrigg ext notifications: prod */ 
 select oc.opportunity_id as 'ID', count(*) as 'trigg_ext_notifications'
 from opportunity_candidates oc
     inner join member_evaluations me on me.candidate_id = oc.id 

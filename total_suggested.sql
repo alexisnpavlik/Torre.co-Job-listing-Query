@@ -1,3 +1,4 @@
+/* AA : Sonic : total suggested: prod */ 
 select 
    o.id as 'ID', 
    count(distinct p.username) as 'Suggested'

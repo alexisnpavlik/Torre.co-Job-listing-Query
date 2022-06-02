@@ -1,3 +1,4 @@
+/* AA : Sonic : daily src app by source: prod */ 
 SELECT
     date(`source`.`interested`) AS `date_src`,
     `source`.`Tracking Codes__utm_source` AS `utm_source_src`,

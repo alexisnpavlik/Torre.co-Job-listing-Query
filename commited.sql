@@ -1,3 +1,4 @@
+/* AA : Sonic : opps commited: prod */ 
 select
    opportunity_id as 'ID',
     (case

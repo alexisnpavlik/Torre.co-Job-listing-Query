@@ -1,3 +1,4 @@
+/* AA : Sonic : weekly syn mm by campaign: prod */ 
 SELECT
     str_to_date(concat(yearweek(`Member Evaluations`.`interested`),' Sunday'),'%X%V %W') AS `date`,
     `source`.`Tracking Codes__utm_campaign` AS `utm_campaign_syn_mm`,

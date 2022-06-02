@@ -1,3 +1,4 @@
+/* AA : Sonic : quality check: prod */ 
 SELECT
     `member_evaluations`.`candidate_id` AS `candidate_id`,
     `People`.`name` AS `People__name`,

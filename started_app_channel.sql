@@ -1,3 +1,4 @@
+/* AA : Sonic : started/finished app: prod */ 
 select
     o.id as ID,
     IF(ISNULL(interested), 'started', 'finished') as finished,

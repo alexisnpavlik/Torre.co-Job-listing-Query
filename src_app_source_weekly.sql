@@ -1,3 +1,4 @@
+/* AA : Sonic : weekly src app by source: prod */ 
 SELECT
     str_to_date(concat(yearweek(`source`.`interested`), ' Sunday'),'%X%V %W') AS `date_src`,
     `source`.`Tracking Codes__utm_source` AS `utm_source_src`,

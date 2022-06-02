@@ -1,3 +1,4 @@
+/* AA : Sonic : app by channel: prod */ 
 select
    opportunity_candidates.opportunity_id as ID,
    date(opportunity_candidates.interested) as interested_date,

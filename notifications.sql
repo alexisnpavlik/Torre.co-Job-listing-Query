@@ -1,3 +1,4 @@
+/* AA : Sonic : jobs notifications: prod */ 
 select
     opportunity_ref as AlfaID,
     sum(case when model = 'realistic' then 1 else 0 end) as realistic,

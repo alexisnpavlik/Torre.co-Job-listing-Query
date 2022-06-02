@@ -1,3 +1,4 @@
+/* AA : Sonic : daily syn mm by campaign: prod */ 
 SELECT
     date(`Member Evaluations`.`interested`) AS `date`,
     `source`.`Tracking Codes__utm_campaign` AS `utm_campaign_syn_mm`,

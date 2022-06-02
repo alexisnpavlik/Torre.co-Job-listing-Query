@@ -1,3 +1,4 @@
+/* AA : Sonic : opps by proficiency: prod */ 
 SELECT
     ID,
     GREATEST(ifnull(years, 0), ifnull(prof_years, 0)) AS max_years,

@@ -1,3 +1,4 @@
+/* AA : Sonic : main query: prod */ 
 SELECT
     -- ID
     o.id as 'ID',

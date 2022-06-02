@@ -1,3 +1,4 @@
+/* AA : Sonic : invited from suggested: prod */ 
 select 
     distinct(o.id) as 'ID',
     count(p.name) as 'Invited from suggested'

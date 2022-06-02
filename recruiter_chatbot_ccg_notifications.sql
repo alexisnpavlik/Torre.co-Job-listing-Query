@@ -1,3 +1,4 @@
+/* AA : Sonic : ccg notifications: prod */ 
 SELECT TRIM('"' FROM JSON_EXTRACT(`notifications`.`context`, '$.opportunityId')) as 'Alfa ID', count(*) as 'rc_ccg_notifications'
 FROM `notifications` INNER JOIN `person_flags` `Person Flags - To` ON `notifications`.`to` = `Person Flags - To`.`person_id`
 WHERE (`notifications`.`template` = 'career-advisor-job-opportunity'

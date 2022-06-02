@@ -1,3 +1,4 @@
+/* AA : Sonic : manual invite request: prod */ 
 select  
    opportunity_id as AlfaID,
    count(case when status = 'sent' then 1 end) as sent,

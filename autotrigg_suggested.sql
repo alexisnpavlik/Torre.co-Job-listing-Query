@@ -1,3 +1,4 @@
+/* AA : Sonic : autotrigg sugg notifications: prod */ 
 SELECT 
     oam.opportunity_id as 'ID',
     count(*) as 'trigg_sugg_notifications'

@@ -1,3 +1,4 @@
+/* AA : Sonic : daily app by aac: prod */ 
 SELECT
     date(`source`.`interested`) AS `date`,
     `source`.`People_name` AS `AAC_name`,

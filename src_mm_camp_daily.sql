@@ -1,3 +1,4 @@
+/* AA : Sonic : daily src mm by campaign: prod */ 
 SELECT
     date(`Member Evaluations`.`interested`) AS `date`,
     `source`.`Tracking Codes__utm_campaign` AS `utm_campaign_src_mm`,

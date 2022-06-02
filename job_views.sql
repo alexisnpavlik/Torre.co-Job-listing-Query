@@ -1,3 +1,4 @@
+/* AA : Sonic : job views: prod */ 
 select o.id as 'ID', count(*) as 'views'
 from views v 
 inner join opportunities o on o.id = v.target_id

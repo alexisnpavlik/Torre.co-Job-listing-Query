@@ -1,3 +1,4 @@
+/* AA : Sonic : disqualified by channel: prod */ 
 SELECT
     o.id as ID,
     `Tracking Codes`.`utm_medium` as utm_medium,

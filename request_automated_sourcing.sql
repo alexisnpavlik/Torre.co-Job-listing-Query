@@ -1,3 +1,4 @@
+/* AA : Sonic : rc_src requests: prod */ 
 select 
    TRIM('"' FROM JSON_EXTRACT(context, '$.opportunityId')) as AlfaID,
    count(JSON_EXTRACT(context, '$.opportunityId')) as 'Requests from automated sourcing'
