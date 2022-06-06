@@ -13,6 +13,7 @@ select
    sum(case when utm_medium = 'rc_syn' then 1 else 0 end) as 'Recruiter chatbot syndication',
    sum(case when utm_medium = 'rc_src' then 1 else 0 end) as 'Recruiter chatbot sourcing',
    sum(case when utm_medium = 'am_sug' then 1 else 0 end) as 'Auto triggered messages to suggested candidates',
+   sum(case when utm_medium = 'rc_am_sug' then 1 else 0 end) as 'Auto triggered to suggested candidates',
    sum(case when utm_medium = 'srh_jobs' then 1 else 0 end) as 'Job search',
    sum(case when utm_medium = 'sml_jobs' then 1 else 0 end) as 'Similar jobs',
    sum(case when utm_medium = 'am_inv' then 1 else 0 end) as 'Auto triggered messages to invited external candidates',

@@ -19,6 +19,7 @@ where
         'srh_jobs',
         'ja_mtc',
         'am_sug',
+        'rc_am_sug',
         'am_inv',
         'rc_cb_rcdt',
         'rc_trrx_inv',
