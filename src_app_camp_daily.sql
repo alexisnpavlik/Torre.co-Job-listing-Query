@@ -54,6 +54,7 @@ WHERE
             OR `source`.`Tracking Codes__utm_campaign` = 'afdg'
             OR `source`.`Tracking Codes__utm_campaign` = 'xncs'
             OR `source`.`Tracking Codes__utm_campaign` = 'fcc'
+            OR `source`.`Tracking Codes__utm_campaign` = 'ana'
             OR `source`.`Tracking Codes__utm_campaign` = 'lfpa_ra'
             OR `source`.`Tracking Codes__utm_campaign` = 'mmor_ra'
             OR `source`.`Tracking Codes__utm_campaign` = 'smnb_ra'
@@ -71,6 +72,7 @@ WHERE
             OR `source`.`Tracking Codes__utm_campaign` = 'afdg_ra'
             OR `source`.`Tracking Codes__utm_campaign` = 'xncs_ra'
             OR `source`.`Tracking Codes__utm_campaign` = 'fcc_ra'
+            OR `source`.`Tracking Codes__utm_campaign` = 'ana_ra'
         )
     )
 GROUP BY
