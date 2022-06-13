@@ -7,4 +7,4 @@ from
 where
     true
     and status = 'APPROVED'
-    and type = 'SKILL';
+    and type = 'SKILL'
