@@ -44,8 +44,8 @@ SELECT
     as 'Mutual matches',
     -- Active
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and SUBSTRING(oc2.name, 1,2) <> '@'
-    and SUBSTRING(oc2.name, 1,2) <> '#'
+    and SUBSTRING(oc2.name, 1,1) <> '@'
+    and SUBSTRING(oc2.name, 1,1) <> '#'
     and oc2.name <> 'mutual matches'
     and oc2.name <> 'hired'
     and oc2.name <> 'contratados'
