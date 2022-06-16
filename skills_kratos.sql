@@ -1,10 +1,10 @@
 /* AA : Sonic : skills terms: prod */ 
 select
-    id as 'Skill ID',
-    term as 'Skills name'
+    terms.id as 'Skill ID',
+    terms.term as 'Skills name'
 from
     terms
+    left join term_types on terms.id = term_types.term_id
 where
-    true
-    and status = 'APPROVED'
-    and type = 'SKILL'
+    terms.status = 'APPROVED'
+    and term_types.type = 'SKILL'
