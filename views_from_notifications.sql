@@ -11,6 +11,9 @@ WHERE
             lower("atomic"."events"."page_url") like '%post%'
         )
         AND (
+            lower("atomic"."events"."page_urlpath") like '%post%'
+        )
+        AND (
             "atomic"."events"."mkt_medium" = 'am_sug'
             OR "atomic"."events"."mkt_medium" = 'srh_jobs'
             OR "atomic"."events"."mkt_medium" = 'ja_mtc'
@@ -26,4 +29,6 @@ WHERE
         )
     )
 GROUP BY
-    1,2
+    SUBSTRING("atomic"."events"."page_urlpath",7,8),
+    "atomic"."events"."domain_userid",
+    "atomic"."events"."mkt_medium"
