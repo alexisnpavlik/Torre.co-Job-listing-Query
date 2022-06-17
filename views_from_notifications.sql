@@ -1,6 +1,5 @@
 SELECT
     SUBSTRING("atomic"."events"."page_urlpath",7,8) as "Alfa ID",
-    "atomic"."events"."domain_userid",
     "atomic"."events"."mkt_medium" AS "UTM",
     count(*) AS "count"
 FROM
