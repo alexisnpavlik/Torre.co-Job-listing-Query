@@ -1,7 +1,7 @@
 SELECT
     SUBSTRING("atomic"."events"."page_urlpath",7,8) as "Alfa ID",
     "atomic"."events"."mkt_medium" AS "UTM",
-    count(*) AS "count"
+    count(distinct "atomic"."events"."domain_userid") AS "count"
 FROM
     "atomic"."events"
 WHERE
@@ -30,5 +30,4 @@ WHERE
     )
 GROUP BY
     SUBSTRING("atomic"."events"."page_urlpath",7,8),
-    "atomic"."events"."domain_userid",
     "atomic"."events"."mkt_medium"
