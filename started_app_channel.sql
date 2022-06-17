@@ -31,6 +31,7 @@ where
         'syn',
         'src',
         'sml_jobs',
+        'rc_sml_jobs',
         'trr_crg',
         'trr_webinars',
         'google_jobs',
