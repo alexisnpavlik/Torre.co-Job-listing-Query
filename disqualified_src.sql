@@ -1,5 +1,6 @@
 SELECT
     `opportunities`.`id` AS `ID`,
+    `opportunity_members`.`sharing_token` AS `sharing_token`,
     `people`.`name` AS `Name`,
     `people`.`username` AS `Username`,
     `Opportunity Candidates`.`interested` AS `Interested_date`,
@@ -14,6 +15,7 @@ FROM
     LEFT JOIN `member_evaluation_feedback` `Member Evaluation Feedback - Feedback` ON `member_evaluations`.`feedback_id` = `Member Evaluation Feedback - Feedback`.`id`
     LEFT JOIN `tracking_code_candidates` `Tracking Code Candidates` ON `Opportunity Candidates`.`id` = `Tracking Code Candidates`.`candidate_id`
     LEFT JOIN `tracking_codes` `Tracking Codes` ON `Tracking Code Candidates`.`tracking_code_id` = `Tracking Codes`.`id` 
+    LEFT JOIN `opportunity_members` ON `opportunities`.`id` = `opportunity_members`.`opportunity_id` AND (`opportunity_members`.`manager` = true AND `opportunity_members`.`status` = 'accepted')
 WHERE 
    `Tracking Codes`.`utm_medium` = 'rc_src'
    AND `member_evaluations`.`not_interested` IS NOT NULL
