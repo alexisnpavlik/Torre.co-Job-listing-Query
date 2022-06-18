@@ -77,9 +77,9 @@ SELECT
     -- Languages required
     (select group_concat(concat(lan.language_code,' : ',lan.fluency)) from opportunity_languages lan where o.id = lan.opportunity_id and lan.active = 1) as 'Languages',
     -- Hires
-    (select sum(case when osh.hiring_date is not null then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires',
+    (select sum(case when osh.hiring_date is not null then 1 else 0 end) from opportunity_operational_hires osh where o.id=osh.opportunity_id) as 'Hires',
     -- Hires yesterday
-    (select sum(case when osh.hiring_date is not null and DATE(osh.hiring_date) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else 0 end) from opportunity_stats_hires osh where o.id=osh.opportunity_id) as 'Hires yesterday',
+    (select sum(case when osh.hiring_date is not null and DATE(osh.hiring_date) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else 0 end) from opportunity_operational_hires osh where o.id=osh.opportunity_id) as 'Hires yesterday',
     -- Opportunity approved yesterday
    case when DATE(o.reviewed) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then TRUE else null end as 'Opportunity approved yesterday',
     -- Completed applications in the last 14 days
