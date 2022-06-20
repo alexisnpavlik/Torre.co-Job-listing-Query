@@ -19,6 +19,7 @@ WHERE
             OR "atomic"."events"."mkt_medium" = 'ja_mtc'
             OR "atomic"."events"."mkt_medium" = 'rc_cb_rcdt'
             OR "atomic"."events"."mkt_medium" = 'sml_jobs'
+            OR "atomic"."events"."mkt_medium" = 'rc_sml_jobs'
             OR "atomic"."events"."mkt_medium" = 'rc_trrx_inv'
             OR "atomic"."events"."mkt_medium" = 'ref_ts'
             OR "atomic"."events"."mkt_medium" = 'am_inv'
