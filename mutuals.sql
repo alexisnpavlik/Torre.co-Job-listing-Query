@@ -37,7 +37,6 @@ WHERE
         `Member Evaluations`.`interested` IS NOT NULL
         AND `Member Evaluations`.`interested` > "2021-1-1"
         AND `Member Evaluations`.`interested` < date(date_add(now(6), INTERVAL 1 day))
-        AND date(`Member Evaluations`.`interested`) = date(`source`.`interested`)
     )
 GROUP BY
     `source`.`Tracking Codes__utm_medium`,

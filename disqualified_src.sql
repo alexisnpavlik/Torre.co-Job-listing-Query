@@ -6,7 +6,8 @@ SELECT
     `Opportunity Candidates`.`interested` AS `Interested_date`,
     max(`member_evaluations`.`not_interested`) AS `Disqualified_date`,
     `member_evaluations`.`reason` AS `Reason disqualified`,
-    `Member Evaluation Feedback - Feedback`.`feedback` AS `Other reason disqualified`
+    `Member Evaluation Feedback - Feedback`.`feedback` AS `Other reason disqualified`,
+    `Tracking Codes`.`utm_medium` AS `UTM`
 FROM
     `opportunities`
     LEFT JOIN `opportunity_candidates` `Opportunity Candidates` ON `opportunities`.`id` = `Opportunity Candidates`.`opportunity_id`
@@ -18,6 +19,8 @@ FROM
     LEFT JOIN `opportunity_members` ON `opportunities`.`id` = `opportunity_members`.`opportunity_id` AND (`opportunity_members`.`manager` = true AND `opportunity_members`.`status` = 'accepted')
 WHERE 
    `Tracking Codes`.`utm_medium` = 'rc_src'
+   OR `Tracking Codes`.`utm_medium` = 'rc_syn'
+   OR `Tracking Codes`.`utm_medium` = 'syn'
    AND `member_evaluations`.`not_interested` IS NOT NULL
 GROUP BY 
    `opportunities`.`id`,
