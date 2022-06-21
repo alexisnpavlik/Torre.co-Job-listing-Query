@@ -17,11 +17,7 @@ FROM
     LEFT JOIN `tracking_codes` `Tracking Codes` ON `Tracking Code Candidates`.`tracking_code_id` = `Tracking Codes`.`id` 
     LEFT JOIN `opportunity_members` ON `opportunities`.`id` = `opportunity_members`.`opportunity_id` AND (`opportunity_members`.`manager` = true AND `opportunity_members`.`status` = 'accepted')
 WHERE 
-   (
-   `Tracking Codes`.`utm_medium` = 'rc_syn'
-   OR `Tracking Codes`.`utm_medium` = 'syn'
-   OR `Tracking Codes`.`utm_medium` = 'rc_src'
-   )
+   `Tracking Codes`.`utm_medium` = 'rc_src'
    AND `member_evaluations`.`not_interested` IS NOT NULL
 GROUP BY 
    `opportunities`.`id`,
