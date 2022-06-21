@@ -6,8 +6,7 @@ SELECT
     `Opportunity Candidates`.`interested` AS `Interested_date`,
     max(`member_evaluations`.`not_interested`) AS `Disqualified_date`,
     `member_evaluations`.`reason` AS `Reason disqualified`,
-    `Member Evaluation Feedback - Feedback`.`feedback` AS `Other reason disqualified`,
-    `Tracking Codes`.`utm_medium` AS `UTM`
+    `Member Evaluation Feedback - Feedback`.`feedback` AS `Other reason disqualified`
 FROM
     `opportunities`
     LEFT JOIN `opportunity_candidates` `Opportunity Candidates` ON `opportunities`.`id` = `Opportunity Candidates`.`opportunity_id`
