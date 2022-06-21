@@ -11,8 +11,8 @@ FROM
             `opportunity_operational_hires`.`hiring_date` AS `hiring_date`,
             `opportunity_candidates`.`opportunity_id` AS `opportunity_id`,
             `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
-            `Opportunities`.`remote` AS `Opportunities__remote`,
-            `Opportunities`.`fulfillment` AS `Opportunities__fulfillment`
+            `Opportunities`.`remote` AS `remote`,
+            `People`.`name` AS `People_name`
         FROM
             `opportunity_candidates`
             LEFT JOIN `tracking_code_candidates` `Tracking Code Candidates` ON `opportunity_candidates`.`id` = `Tracking Code Candidates`.`candidate_id`
