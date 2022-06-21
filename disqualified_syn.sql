@@ -20,6 +20,7 @@ WHERE
    `Tracking Codes`.`utm_medium` = 'rc_syn'
    OR `Tracking Codes`.`utm_medium` = 'syn'
    AND `member_evaluations`.`not_interested` IS NOT NULL
+   AND `Opportunity Candidates`.`interested` > '2022-01-01'
 GROUP BY 
    `opportunities`.`id`,
    `people`.`username`
