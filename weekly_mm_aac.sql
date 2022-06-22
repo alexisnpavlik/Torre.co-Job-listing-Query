@@ -11,7 +11,7 @@ FROM
     LEFT JOIN people p ON o.applicant_coordinator_person_id = p.id
 WHERE
     oc.name = 'mutual matches'
-    AND occh.created >= '2022-05-01'
+    AND occh.created >= '2021-01-01'
     AND oca.interested IS NOT NULL 
     AND o.remote = 1
     AND o.objective NOT LIKE '**%'
