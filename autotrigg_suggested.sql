@@ -1,14 +1,15 @@
 /* AA : Sonic : autotrigg sugg notifications: prod */ 
-SELECT 
-    oam.opportunity_id as 'ID',
+SELECT
+    TRIM('"' FROM JSON_EXTRACT(`notifications`.`context`, '$.opportunityId')) as 'Alfa ID',
     count(*) as 'trigg_sugg_notifications'
-FROM  
-    opportunity_automated_messages as oam 
-    left join automated_messages as am on (oam.automated_message_id = am.id)
-    left join opportunity_columns as oc on (oam.column_id = oc.id)
-    left join automated_messages_notifications as amn on (am.id = amn.automated_message_id)
+FROM
+    `notifications`
 WHERE
-    oam.active = true 
-    and am.active = true
-    and amn.status = 'sent'
+    (
+        (
+            `notifications`.`template` = 'talent-candidate-manually-invited'
+        )
+        AND `notifications`.`status` = 'sent'
+        AND `notifications`.`sent_at` >= '2021-08-15'
+    )
 GROUP BY 1
