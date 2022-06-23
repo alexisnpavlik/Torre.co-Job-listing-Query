@@ -15,7 +15,6 @@ WHERE
     AND oca.interested IS NOT NULL 
     AND o.remote = 1
     AND o.objective NOT LIKE '**%'
-    AND date(occh.created) = date(oca.interested)
     AND o.id IN (
         SELECT
             DISTINCT o.id AS opportunity_id
