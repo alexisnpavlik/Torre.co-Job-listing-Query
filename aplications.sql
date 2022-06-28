@@ -16,7 +16,7 @@ select
    sum(case when utm_medium = 'rc_am_sug' then 1 else 0 end) as 'Auto triggered to suggested candidates',
    sum(case when utm_medium = 'srh_jobs' then 1 else 0 end) as 'Job search',
    sum(case when utm_medium = 'sml_jobs' then 1 else 0 end) as 'Similar jobs',
-   sum(case when utm_medium = 'rc_sml_jobs' then 1 else 0 end) as 'Personal reach out to candidates of similar jobs',
+   sum(case when utm_medium = 'rc_sml_jobs' then 1 else 0 end) as 'Personal reach out to candidates of similar jobs 2',
    sum(case when utm_medium = 'am_inv' then 1 else 0 end) as 'Auto triggered messages to invited external candidates',
    sum(case when utm_medium = 'google_jobs' then 1 else 0 end) as 'Google for jobs',
    sum(case when utm_medium = 'fb_jobs' then 1 else 0 end) as 'Facebook jobs',
