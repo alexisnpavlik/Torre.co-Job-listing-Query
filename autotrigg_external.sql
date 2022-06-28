@@ -1,6 +1,6 @@
 /* AA : Sonic : autotrigg ext notifications: prod */
 SELECT
-    TRIM('"' FROM JSON_EXTRACT(`notifications`.`context`, '$.opportunityId')) as 'Alfa ID',
+    TRIM('"' FROM JSON_EXTRACT(`notifications`.`context`, '$.opportunityId')) as 'ID',
     count(*) as 'trigg_ext_notifications'
 FROM
     `notifications`
