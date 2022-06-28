@@ -37,7 +37,7 @@ WHERE
     (
         `source`.`hiring_date` IS NOT NULL
         AND `source`.`remote` = TRUE
-        AND `source`.`hiring_date` > "2021-1-1"
+        AND `source`.`hiring_date` > "2022-1-1"
         AND `source`.`hiring_date` < date(date_add(now(6), INTERVAL 1 day))
     )
 GROUP BY
