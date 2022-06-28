@@ -2,7 +2,7 @@
 SELECT
     str_to_date(concat(yearweek(occh.created), ' Sunday'),'%X%V %W') AS date,
     p.name AS AAC_name,
-    count(*) AS count_weekly_mm
+    count(distinct occh.candidate_id) AS count_weekly_mm
 FROM
     opportunity_candidate_column_history occh
     INNER JOIN opportunity_columns oc ON occh.to = oc.id

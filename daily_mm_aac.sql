@@ -2,7 +2,7 @@
 SELECT
     date(occh.created) AS date,
     p.name AS AAC_name,
-    count(*) AS count_daily_mm
+    count(distinct occh.candidate_id) AS count_daily_mm
 FROM
     opportunity_candidate_column_history occh
     INNER JOIN opportunity_columns oc ON occh.to = oc.id
