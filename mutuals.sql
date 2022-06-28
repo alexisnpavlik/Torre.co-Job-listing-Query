@@ -2,7 +2,7 @@
 SELECT 
     oc.opportunity_id AS ID,
     tc.utm_medium AS UTM,
-    count(*) AS mutuals
+    count(distinct occh.candidate_id) AS mutuals
 FROM
     opportunity_candidate_column_history occh
     INNER JOIN opportunity_columns oc ON occh.to = oc.id
