@@ -23,5 +23,4 @@ WHERE
     (
         `Questions`.`purpose` = 'filter'
     )
-GROUP BY `opportunity_candidates`.`id`,`opportunity_candidates`.`opportunity_id`
 ORDER by `Opportunity ID` asc
