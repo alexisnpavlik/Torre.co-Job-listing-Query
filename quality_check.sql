@@ -3,7 +3,6 @@ SELECT
     `member_evaluations`.`candidate_id` AS `candidate_id`,
     `People`.`name` AS `People__name`,
     `People`.`username` AS `People__username`,
-    `Comments`.`candidate_person_id` AS `candidate_person_id`,
     `Opportunity Candidates - Candidate`.`opportunity_id` AS `Opportunity ID`,
     max(`Opportunity Candidates - Candidate`.`interested`) AS `interested`,
     max(`member_evaluations`.`not_interested`) AS `not_interested`,
