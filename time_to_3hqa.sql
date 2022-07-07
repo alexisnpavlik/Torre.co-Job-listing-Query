@@ -25,7 +25,11 @@ FROM
                     applications
                 WHERE
                     applications.match_score > 0.85
-                ORDER BY 
+                    AND (
+                        applications.filters_passed = true
+                        OR applications.filters_passed IS NULL
+                    )
+                ORDER BY
                     applications.opportunity_reference_id,
                     applications.timestamp
             ) AS hqa
