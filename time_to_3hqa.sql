@@ -7,12 +7,12 @@ FROM
         SELECT
             hqa.*,
             IF(
-                @index <> hqa.opportunity_reference_id,
+                BINARY @index <> BINARY hqa.opportunity_reference_id,
                 @sum := 1,
                 @sum := @sum + 1
             ) AS hqa_sum,
             IF(
-                @index <> hqa.opportunity_reference_id,
+                BINARY @index <> BINARY hqa.opportunity_reference_id,
                 @index := hqa.opportunity_reference_id,
                 @index := @index
             ) AS idd
