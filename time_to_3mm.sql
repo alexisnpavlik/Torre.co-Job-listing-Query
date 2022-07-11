@@ -3,7 +3,7 @@ SELECT
           opportunity_id AS ID,
           date(reviewed) AS reviewed_date,
           date(created) AS match_date,
-          datediff(date(created),date(reviewed)) AS time_to_3mm
+          datediff(date(created),date(reviewed)) AS time_to_7mm
       FROM
           (SELECT
                matches.*,
