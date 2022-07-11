@@ -50,4 +50,4 @@ SELECT
                                    @sum := 0,
                                    @index := 0) counter) numbered
       WHERE
-          match_sum = 3
+          match_sum = 7
