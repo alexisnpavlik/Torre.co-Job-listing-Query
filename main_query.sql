@@ -37,11 +37,14 @@ SELECT
     sum(case when oc.id is not null and oc.interested is not null and DATE(oc.interested) = DATE(DATE(NOW()) - INTERVAL 1 DAY) then 1 else 0 end) as 'Completed applications yesterday',
     -- Incomplete applications
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
-    -- Mutual matches
+    -- Mutual matches pipeline
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and oc2.name = 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Mutual matches',
+    -- Real mutual matches
+    (select count(distinct occh.candidate_id) from opportunity_candidate_column_history occh inner join opportunity_columns oc ON occh.to = oc.id where oc.name = 'mutual matches' and o.id = oc.opportunity_id)
+    as 'Real Mutual matches',
     -- Active
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and SUBSTRING(oc2.name, 1,1) <> '#'
