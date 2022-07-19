@@ -56,13 +56,13 @@ SELECT
     as 'Real Active',
     -- Others
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and (oc2.name <> 'mutual matches')
+    and oc2.name <> 'mutual matches'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Others',
     -- Hires pipeline
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and SUBSTRING(oc2.name, 1,5) <> 'hired'
-    and SUBSTRING(oc2.name, 1,10) <> 'contratado'
+    and (SUBSTRING(oc2.name, 1,5) = 'hired'
+    or SUBSTRING(oc2.name, 1,10) = 'contratado')
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Hires pipeline',
     -- Disqualified
