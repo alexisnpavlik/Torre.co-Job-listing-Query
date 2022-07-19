@@ -39,7 +39,7 @@ SELECT
     sum(case when oc.id is not null and oc.interested is null and application_step is not null then 1 else 0 end) as  'Incomplete applications',
     -- Mutual matches pipeline
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and oc2.name = 'mutual matches'
+    and (oc2.name = 'mutual matches' or oc2.name = 'coincidencia mutua')
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Mutual matches',
     -- Real mutual matches
@@ -48,20 +48,21 @@ SELECT
     -- Active
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
     and SUBSTRING(oc2.name, 1,1) <> '#'
+    and SUBSTRING(oc2.name, 1,5) <> 'hired'
+    and SUBSTRING(oc2.name, 1,10) <> 'contratado'
     and oc2.name <> 'mutual matches'
-    and oc2.name <> 'hired'
-    and oc2.name <> 'contratados'
+    and oc2.name <> 'coincidencia mutua'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Real Active',
     -- Others
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and oc2.name <> 'mutual matches'
+    and (oc2.name <> 'mutual matches')
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Others',
-    -- Hires
+    -- Hires pipeline
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and (oc2.name = 'Hired'
-    or oc2.name = 'Contratados')
+    and SUBSTRING(oc2.name, 1,5) <> 'hired'
+    and SUBSTRING(oc2.name, 1,10) <> 'contratado'
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Hires pipeline',
     -- Disqualified
@@ -116,6 +117,7 @@ WHERE true
     AND o.Objective not like '**%'
     AND o.created >= '2021-01-01'
     AND o.active = TRUE
+    AND o.id = 1873374
     
 GROUP BY o.id
 ORDER BY o.created desc;
