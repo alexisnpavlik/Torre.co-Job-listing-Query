@@ -209,3 +209,5 @@ FROM
         GROUP BY
             `applications`.`opportunity_reference_id`
     ) hqtmmst on `opportunity`.`ref_id` = `hqtmmst`.`opportunity_reference_id`
+GROUP BY
+    `opportunity`.`ref_id`
