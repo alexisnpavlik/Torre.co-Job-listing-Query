@@ -7,3 +7,4 @@ SELECT
     state_transition.timestamp
 FROM
    state_transition
+WHERE state_transition.timestamp >= date(date_add(now(6), INTERVAL -30 day))
