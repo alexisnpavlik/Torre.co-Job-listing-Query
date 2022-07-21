@@ -24,7 +24,7 @@ WHERE
    )
    AND `Opportunity Candidates`.`interested` IS NOT NULL
    AND `member_evaluations`.`not_interested` IS NOT NULL
-   AND `Opportunity Candidates`.`interested` > '2022-01-01'
+   AND `Opportunity Candidates`.`interested` >= date(date_add(now(6), INTERVAL -90 day))
 GROUP BY 
    `opportunities`.`id`,
    `people`.`username`

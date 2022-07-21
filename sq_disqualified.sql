@@ -47,5 +47,5 @@ FROM
 INNER JOIN `opportunity_questions` ON (`max_rank`.`rank` = `opportunity_questions`.`rank` AND `max_rank`.`Opportunity_ID` = `opportunity_questions`.`opportunity_id`) AND `opportunity_questions`.`active` IS TRUE
 LEFT JOIN `questions` ON `opportunity_questions`.`question_id` = `questions`.`id`
 LEFT JOIN `opportunity_candidate_responses` ON (`max_rank`.`id` = `opportunity_candidate_responses`.`candidate_id` AND `opportunity_questions`.`question_id` = `opportunity_candidate_responses`.`question_id`) AND `opportunity_candidate_responses`.`active` IS TRUE
-WHERE `max_rank`.`not_interested` >= date(date_add(now(6), INTERVAL -120 day))
+WHERE `max_rank`.`not_interested` >= date(date_add(now(6), INTERVAL -90 day))
 ORDER BY `Opportunity ID` DESC
