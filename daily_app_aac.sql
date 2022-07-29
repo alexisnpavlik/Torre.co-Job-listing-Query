@@ -23,8 +23,7 @@ FROM
             LEFT JOIN `people` `People` ON (`Opportunities`.`applicant_coordinator_person_id` = `People`.`id`)
     ) `source`
 WHERE
-    `source`.`remote` = TRUE
-    AND `source`.`interested` >= '2022-01-01'
+    `source`.`interested` >= '2022-01-01'
     AND `source`.`interested` < date(date_add(now(6), INTERVAL 1 day))
 GROUP BY
     date(`source`.`interested`),

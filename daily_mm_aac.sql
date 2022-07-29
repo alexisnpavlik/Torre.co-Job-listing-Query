@@ -13,7 +13,6 @@ WHERE
     oc.name = 'mutual matches'
     AND occh.created >= '2022-01-01'
     AND oca.interested IS NOT NULL 
-    AND o.remote = 1
     AND o.objective NOT LIKE '**%'
     AND o.id IN (
         SELECT
