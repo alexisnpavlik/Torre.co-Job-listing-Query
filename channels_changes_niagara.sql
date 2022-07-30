@@ -8,4 +8,4 @@ SELECT
     opportunity_channels.modified
 FROM
    opportunity_channels
-WHERE opportunity_channels.created >= date(date_add(now(6), INTERVAL -30 day))
+WHERE opportunity_channels.modified >= date(date_add(now(6), INTERVAL -30 day))
