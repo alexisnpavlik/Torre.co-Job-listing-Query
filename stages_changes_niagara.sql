@@ -9,4 +9,3 @@ FROM
    state_transition
 WHERE 
     state_transition.timestamp >= date(date_add(now(6), INTERVAL -20 day))
-    AND state_transition.active = 'False'
