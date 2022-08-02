@@ -7,6 +7,7 @@ SELECT
     max(`Opportunity Candidates - Candidate`.`interested`) AS `interested`,
     max(`member_evaluations`.`not_interested`) AS `not_interested`,
     max(`member_evaluations`.`reason`) AS `reason`,
+    `member_evaluations_reason`.`reason` AS `reason_2`,
     `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
     `Opportunity Columns - Column`.`name` AS `Pipeline`,
     max(`Member Evaluation Feedback - Feedback`.`feedback`) AS `Reason - Others`,
@@ -18,9 +19,11 @@ FROM
     LEFT JOIN `tracking_codes` `Tracking Codes` ON `Tracking Code Candidates - Candidate`.`tracking_code_id` = `Tracking Codes`.`id`
     LEFT JOIN `people` `People` ON `Opportunity Candidates - Candidate`.`person_id` = `People`.`id`
     LEFT JOIN `opportunity_columns` `Opportunity Columns - Column` ON `Opportunity Candidates - Candidate`.`column_id` = `Opportunity Columns - Column`.`id`
-    LEFT JOIN `member_evaluation_feedback` `Member Evaluation Feedback - Feedback` ON `member_evaluations`.`feedback_id` = `Member Evaluation Feedback - Feedback`.`id`
+    LEFT JOIN `member_evaluations_reason` ON `member_evaluations`.`id` = `member_evaluations_reason`.`member_evaluation_id`
+    LEFT JOIN `member_evaluation_feedback` `Member Evaluation Feedback - Feedback` ON `member_evaluations_reason`.`feedback_id` = `Member Evaluation Feedback - Feedback`.`id` 
     LEFT JOIN `comments` `Comments` ON `People`.`id` = `Comments`.`candidate_person_id` AND `Opportunity Candidates - Candidate`.`opportunity_id` = `Comments`.`opportunity_id`
 WHERE
-    `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -90 day))
+    `Opportunity Candidates - Candidate`.`interested` >= date(date_add(now(6), INTERVAL -60 day))
 GROUP BY `member_evaluations`.`candidate_id`,`Opportunity Candidates - Candidate`.`opportunity_id`
+ORDER BY `member_evaluations`.`not_interested` DESC
 
