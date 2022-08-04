@@ -88,7 +88,9 @@ SELECT
     -- Completed applications in the last 14 days
     sum(case when oc.id is not null and oc.interested is not null and DATE(oc.created) >= DATE(DATE(NOW()) - INTERVAL 14 DAY) then 1 else 0 end) as 'Completed applications in the last 14 days',
     -- Sharing token
-    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token'
+    (select sharing_token from opportunity_members where manager = true and status = 'accepted' and opportunity_id =  o.id  limit 1) as 'Sharing token',
+    -- Compensation
+    (select GROUP_CONCAT(CONCAT(ifnull(opportunity_compensations.currency,'nan'),' ',ifnull(round(opportunity_compensations.min_amount,0),''),if(opportunity_compensations.code = 'range',' - ',''),ifnull(round(opportunity_compensations.max_amount,0),''),'/',ifnull(opportunity_compensations.periodicity,'nan'))) from opportunity_compensations where opportunity_compensations.active = true and opportunity_compensations.opportunity_id = o.id) as 'Compensation'
 
 
 FROM opportunities o 
