@@ -10,6 +10,7 @@ SELECT
     `member_evaluations_reason`.`reason` AS `reason_2`,
     `Tracking Codes`.`utm_medium` AS `Tracking Codes__utm_medium`,
     `Opportunity Columns - Column`.`name` AS `Pipeline`,
+    `Opportunity Columns - Column`.`funnel_tag` AS `Funnel tag`,
     max(`Member Evaluation Feedback - Feedback`.`feedback`) AS `Reason - Others`,
     `Comments`.`text` AS `Notes`
 FROM
