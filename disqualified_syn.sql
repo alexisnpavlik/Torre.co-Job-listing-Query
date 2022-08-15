@@ -21,8 +21,9 @@ FROM
     LEFT JOIN `opportunity_members` ON `opportunities`.`id` = `opportunity_members`.`opportunity_id` AND (`opportunity_members`.`manager` = true AND `opportunity_members`.`status` = 'accepted')
 WHERE
    (
-   `Tracking Codes`.`utm_medium` = 'rc_syn'
-   OR `Tracking Codes`.`utm_medium` = 'syn'
+       `Tracking Codes`.`utm_medium` = 'rc_syn'
+       OR `Tracking Codes`.`utm_medium` = 'syn'
+       OR `Tracking Codes`.`utm_medium` = 'rc_src'
    )
    AND `Opportunity Candidates`.`interested` IS NOT NULL
    AND `member_evaluations`.`not_interested` IS NOT NULL
