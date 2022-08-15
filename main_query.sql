@@ -47,11 +47,9 @@ SELECT
     as 'Real Mutual matches',
     -- Active
     sum(case when oc.id is not null and oc.interested is not null and oc.column_id is not null
-    and SUBSTRING(oc2.name, 1,1) <> '#'
-    and SUBSTRING(oc2.name, 1,5) <> 'hired'
-    and SUBSTRING(oc2.name, 1,10) <> 'contratado'
-    and oc2.name <> 'mutual matches'
-    and oc2.name <> 'coincidencia mutua'
+    and (oc2.funnel_tag = 'ready_for_interview'
+        or oc2.funnel_tag = 'interview'
+        or  oc2.funnel_tag = 'client_testing')
     and (last_evaluation.last_interest is not null and (last_evaluation.last_not_interest is null or last_evaluation.last_interest > last_evaluation.last_not_interest)) then 1 else 0 end)
     as 'Real Active',
     -- Others
