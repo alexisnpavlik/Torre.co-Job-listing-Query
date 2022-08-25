@@ -5,6 +5,7 @@ SELECT
     `opportunity`.`updated_on` AS `opportunity_updated_on`,
     `opportunity`.`compensation_status` AS `compensation_status`,
     `opportunity`.`timeframe` AS `timeframe`,
+    `opportunity`.`target_hires` AS `target_hires`,
     `c`.`channels`,
     c.`channels_open_date`,
     `a`.`applicationsCount` as `applications`,
