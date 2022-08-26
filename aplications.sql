@@ -1,8 +1,6 @@
 /* AA : Sonic : app by channel: prod */ 
-select
+SELECT
    opportunity_candidates.opportunity_id as ID,
-   date(opportunity_candidates.interested) as interested_date,
-   `Tracking Codes`.`utm_medium` as utm_medium,
    sum(case when utm_medium = 'ja_mtc' then 1 else 0 end) as 'Job alerts from matches',
    sum(case when utm_medium = 'ja_rlvsgl_prs' then 1 else 0 end) as 'Job alerts from relevant signals people',
    sum(case when utm_medium = 'ja_allsgl_prs' then 1 else 0 end) as 'Job alerts from all signals people',
@@ -31,11 +29,15 @@ select
    sum(case when utm_medium = 'ref_cdt' then 1 else 0 end) as 'Referrals from candidates',
    sum(case when utm_medium = 'ref_vst_imp' then 1 else 0 end) as 'Referrals from visitors that share a job outside Torre (implicitly)',
    sum(case when utm_medium = 'syn_rqt' then 1 else 0 end) as 'Syndication as requested',
-   sum(case when utm_medium = 'trr_webinars' then 1 else 0 end) as 'Webinars Torre Access'
+   sum(case when utm_medium = 'trr_webinars' then 1 else 0 end) as 'Webinars Torre Access',
+   sum(case when utm_medium = 'syn_paid' then 1 else 0 end) as 'Paid syn manual',
+   sum(case when utm_medium = 'rc_syn_paid' then 1 else 0 end) as 'Paid syn automatic',
+   sum(case when utm_medium is null then 1 else 0 end) as 'Unknown'
 FROM opportunity_candidates
-LEFT JOIN `tracking_code_candidates` `Tracking Code Candidates - Person` ON `opportunity_candidates`.`id` = `Tracking Code Candidates - Person`.`candidate_id`
-LEFT JOIN `tracking_codes` `Tracking Codes` ON `Tracking Code Candidates - Person`.`tracking_code_id` = `Tracking Codes`.`id`
-LEFT JOIN opportunities on opportunities.id = opportunity_candidates.opportunity_id
-WHERE opportunity_candidates.interested is not null
-GROUP BY  ID
+    LEFT JOIN tracking_code_candidates ON opportunity_candidates.id = tracking_code_candidates.candidate_id
+    LEFT JOIN tracking_codes ON tracking_code_candidates.tracking_code_id = tracking_codes.id
+    LEFT JOIN opportunities on opportunities.id = opportunity_candidates.opportunity_id
+WHERE 
+    opportunity_candidates.interested is not null
+GROUP BY ID
 ORDER BY ID desc
