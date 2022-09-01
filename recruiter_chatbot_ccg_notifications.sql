@@ -7,7 +7,8 @@ FROM
     LEFT JOIN `people` `People - To` ON `notifications`.`to` = `People - To`.`id`
 WHERE
     (
-        `notifications`.`template` = 'career-advisor-job-opportunity'
+        (`notifications`.`template` = 'career-advisor-job-opportunity'
+            or `notifications`.`template` = 'career-advisor-invited-job-opportunity')
         AND `notifications`.`status` = 'sent'
         AND `People - To`.`subject_identifier` IS NULL
         AND `People - To`.`name` not like '%test%'
