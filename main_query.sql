@@ -115,7 +115,7 @@ WHERE true
             and o.status <> 'opening-soon'
             )
     AND o.Objective not like '**%'
-    AND  AND DATE(o.reviewed) > date(date_add(now(6), INTERVAL -1 year))
+    AND DATE(o.reviewed) > date(date_add(now(6), INTERVAL -1 year))
     AND o.active = TRUE
 
 GROUP BY o.id
